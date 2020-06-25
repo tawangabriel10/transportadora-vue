@@ -1,0 +1,41 @@
+{
+  "development": {
+    "schema": "gestao",
+    "username": "user_cinco_estrelas",
+    "password": "i9ty-cinco-estrelas",
+    "database": "cinco_estrelas",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    },
+    "operatorsAliases": true
+  },
+  "test": {
+    "schema": "gestao",
+    "username": "user_cinco_estrelas",
+    "password": "i9ty-cinco-estrelas",
+    "database": "cinco_estrelas",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "define":  {
+      "timestamps":  false
+    },
+    "operatorsAliases": true
+  },
+  "production": {
+    "schema": "gestao",
+    "username": "user_cinco_estrelas",
+    "password": "i9ty-cinco-estrelas",
+    "database": "cinco_estrelas",
+    "host": "localhost",
+    "port": 5432,
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    },
+    "operatorsAliases": true
+  }
+}

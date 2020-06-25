@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "shared-node-browser": true,
+    "amd": true,
+    "jquery": true,
+    "mongo": true,
+    "mocha": true,
+    "es6": true
+  },
+  "extends": ["standard"],
+  "rules": {
+    "no-mixed-operators": "off",
+    "generator-star-spacing": "off",
+    "indent": ["error", 2]
+  },
+  "globals": {
+    "serverPath": "readonly",
+    "imp": "readonly",
+    "process": "readonly",
+    "ServerError": "readonly",
+    "UnathorizedError": "readonly",
+    "Response": "readonly",
+    "__dirname": "readonly"
+  }
+}

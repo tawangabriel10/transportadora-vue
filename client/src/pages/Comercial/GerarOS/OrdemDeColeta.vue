@@ -1,7 +1,6 @@
 <template>
   <div class="manter-os">
     <!-- Ordem de coleta-->
-    <v-card-text>
         <h3>Geral</h3>
         <v-row>
             <v-col>
@@ -190,17 +189,16 @@
           </v-tab-item>
           </v-tabs>
         </v-col>
-        </v-row>
-    </v-card-text>
+      </v-row>
   </div>
 </template>
 
-<style lang="scss" src="../GerarOs.scss">
+<style lang="scss" src="./GerarOs.scss">
 </style>
 
 <script>
 import { mapActions } from 'vuex'
-import CustomInput from '../../../../components/CustomInput'
+import CustomInput from '@/components/CustomInput'
 
 const PFHeaders = [
   { text: 'Nome', value: 'nome' },

@@ -1,21 +1,28 @@
 <template>
   <div>
-    <cadastro-de-fornecedor></cadastro-de-fornecedor>
+    <div>
+      <modal-gerar-o-s></modal-gerar-o-s>
+    </div>
+
+    <div>
+      <cadastro-de-clientes></cadastro-de-clientes>
+    </div>
+
+    <div>
+      <cadastro-de-fornecedor></cadastro-de-fornecedor>
+    </div>
   </div>
 </template>
 
 <script>
-//import OrdemDeColeta from '@/pages/Comercial/GerarOS/OrdemDeColeta/OrdemDeColeta'
-//import Mercadorias from '@/pages/Comercial/GerarOS/Mercadorias/Mercadorias'
-//import DadosOpcionais from '@/pages/Comercial/GerarOS/DadosOpcionais/DadosOpcionais'
-//import DadosCadastrais from '@/pages/Comercial/CadastroDeClientes/DadosCadastrais/DadosCadastrais'
+import ModalGerarOS from '@/pages/Comercial/GerarOS/ModalGerarOS'
+import CadastroDeClientes from '@/pages/Comercial/CadastroDeClientes/CadastroDeClientes'
 import CadastroDeFornecedor from '@/pages/Comercial/CadastroDeFornecedor/CadastroDeFornecedor'
 
 export default {
   components: {
-   // OrdemDeColeta,
-   // Mercadorias,
-   //DadosCadastrais,
+   ModalGerarOS,
+   CadastroDeClientes,
    CadastroDeFornecedor
   },
   data () {

@@ -1,7 +1,6 @@
 <template>
     <div class="manter-os">
         <!-- Mercadorias-->
-        <v-card-text>
             <h3>Dados da Mercadoria</h3>
             <v-row>
                 <v-col>
@@ -101,14 +100,13 @@
                     />
                 </v-col>
             </v-row>
-        </v-card-text>
     </div>
 </template>
 
-<style lang="scss" src="../GerarOs.scss"></style>
+<style lang="scss" src="./GerarOs.scss"></style>
 
 <script>
-import CustomInput from '../../../../components/CustomInput'
+import CustomInput from '@/components/CustomInput'
 
 export default {
     components: { CustomInput },

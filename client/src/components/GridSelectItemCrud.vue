@@ -13,7 +13,7 @@
             <thead>
             <tr>
               <th>Ações</th>
-              <th v-for="(header, i) in headers" :key="`grid-select-item-header-${i}`">{{header.text}}</th>
+              <th v-for="(header, i) in headers" :key="`grid-select-item-header-${i}`" v-if="header.showOnGrid">{{header.text}}</th>
             </tr>
             </thead>
             <tbody>

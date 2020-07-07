@@ -22,7 +22,7 @@
               required
               append-icon="mdi mdi-key-variant"/>
             <select v-model="form.idEmpresa">
-              <option :key="`empresa-${item.id}`" v-for="item in empresas" :value="item.id">{{item.nomeEmpresa}}</option>
+              <option :key="`empresa-${item.id}`" v-for="item in empresas" :value="item.id">{{item.nome}}</option>
             </select>
             <v-alert
               v-show="!validLogin"

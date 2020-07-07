@@ -143,6 +143,10 @@ export default {
       type: Function,
       required: false
     },
+    onClickDeleteRow: {
+      type: Function,
+      required: false
+    },
     kpiSumField: {
       type: Object,
       default: () => null
@@ -208,6 +212,7 @@ export default {
         const rowParsed = lodash.cloneDeep(row)
         const handlersPosLoop = []
         this.currentHeaders.forEach((header, index) => {
+          console.log('HEADER', header)
           header.class = `crud-header header-${index}`
           if (header.lookup && this.lookupValues[header.lookupName]) {
             const distinctValue = this.lookupValues[header.lookupName].find(lv => String(lv.id) === String(row[header.value]))
@@ -254,6 +259,8 @@ export default {
       this.totalItems = total
     },
     async filterData (filter = []) {
+      console.log('FILHTER', filter)
+      console.log('ENTITY', this.entity)
       this.setFilter({ entity: this.entity, filter })
       this.pagination = {
         ...this.pagination,
@@ -304,7 +311,11 @@ export default {
     },
 
     async deleteItem (item) {
-      this.$refs.crudBase.delete(item)
+      if (this.$props.onClickDeleteRow) {
+        this.$props.onClickDeleteRow(item)
+      } else {
+        this.$refs.crudBase.delete(item)
+      }
     }
 
   }

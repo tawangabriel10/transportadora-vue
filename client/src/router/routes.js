@@ -3,6 +3,8 @@ import Usuarios from '@/pages/Administracao/Usuarios/List'
 import Configuracoes from '@/pages/Administracao/Configuracoes/Configuracoes'
 import OrdemDeServico from '@/pages/Comercial/OrdemDeServico'
 import ManterOrdemDeServico from '@/pages/Comercial/ManterOrdemDeServico'
+import TesteComercial from '@/pages/Comercial/TesteComercial'
+import MapaDeViagem from '@/pages/Logistica/MapaDeViagem/MapaDeViagem'
 
 const routes = [
   {
@@ -78,6 +80,38 @@ const routes = [
           title: 'Manter Ordem de Serviço',
           userPerfil: ['ADM'],
           hideFromMenu: true
+        }
+      },
+      {
+        path: '/comercial/teste',
+        component: TesteComercial,
+        meta: {
+          icon: 'mdi mdi-account-tie',
+          title: 'Teste Comercial',
+          userPerfil: ['ADM']
+        }
+      }
+    ]
+  },
+  {
+    path: '/logistica',
+    name: 'logistica',
+    component: Home,
+    redirect: '/logistica/mapa-de-viagem',
+    meta: {
+      icon: 'mdi mdi-clipboard-alert',
+      parent: true,
+      title: 'Logística',
+      userPerfil: ['ADM']
+    },
+    children: [
+      {
+        path: '/logistica/mapa-de-viagem',
+        component: MapaDeViagem,
+        meta: {
+          icon: 'mdi mdi-settings',
+          title: 'Mapa de Viagem',
+          userPerfil: ['ADM']
         }
       }
     ]

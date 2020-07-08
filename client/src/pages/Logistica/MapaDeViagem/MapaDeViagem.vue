@@ -3,77 +3,56 @@
 
         <v-tabs>
             <v-tab
-              href="#tab-dados-cadastrais"
-                >1. Dados Cadastrais
+              href="#tab-informacoes"
+                >1. Informações
             </v-tab>
             <v-tab
-              href="#tab-pamento-dados-bancarios-informacoes-fiscais"
-                >2. Pagamento, Dados Bancários e Informações Fiscais
+              href="#tab-previsao"
+                >2. Previsão
             </v-tab>
             <v-tab
-              href="#tab-servicos-produtos-prestados"
-                >3. Serviços e/ou Produtos Prestados
+              href="#tab-trajeto"
+                >3. Trajeto
             </v-tab>
 
-            <v-tab-item value="tab-dados-cadastrais">
+            <v-tab-item value="tab-informacoes">
                 <v-card flat tile>
-
-                    <v-row>
-                        <v-col>
-                        <v-row>
-                            <v-col>
-                                <custom-input
-                                    title="Veículo Principal"
-                                    v-bind="customInputs.veiculoPrincipalProps"
-                                    :edited-item="form"
-                            />
-                            </v-col>
-                            <v-col>
-                                <v-text-field disabled
-                                    label="Descrição"
-                                    v-if="form.idVeiculoPrincipal"
-                                    :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nome" />
-                            </v-col>
-                            <v-col>
-                                <v-text-field disabled
-                                    label="Placa"
-                                    v-if="form.idVeiculoPrincipal"
-                                    :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.placa" />
-                            </v-col>
-                            <v-col>
-                                <v-text-field disabled
-                                    label="Marca/Modelo"
-                                    v-if="form.idVeiculoPrincipal"
-                                    :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.marcaModelo" />
-                            </v-col>
-                            <v-col>
-                                <v-text-field disabled
-                                    label="Tipo do Veículo"
-                                    v-if="form.idVeiculoPrincipal"
-                                    :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.tipoVeiculo && dynamicValues.veiculoPrincipal.tipoVeiculo.nome"
-                            />
-                            </v-col>
-                            <v-col>
-                                <v-text-field disabled
-                                    label="Chassi"
-                                    v-if="form.idVeiculoPrincipal"
-                                    :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
-                            />
-                            </v-col>
-                        </v-row>
-                    </v-col>
-                  </v-row>
+                
+                    <informacoes></informacoes>     
 
                 </v-card>
             </v-tab-item>
+
+            <v-tab-item value="tab-previsao">
+                <v-card flat tile>
+
+                    <previsao></previsao>
+
+                </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-trajeto">
+                <v-card flat tile>
+
+                    <trajeto></trajeto>
+
+                </v-card>
+            </v-tab-item>
+
         </v-tabs>
     </div>
 </template>
 
 <script>
-import CustomInput from '@/components/CustomInput'
+import Informacoes from '@/pages/Logistica/MapaDeViagem/Informacoes'
+import Previcao from '@/pages/Logistica/MapaDeViagem/Previsao'
+import Trajeto from '@/pages/Logistica/MapaDeViagem/Trajeto'
 
 export default {
-    components: { CustomInput }
+    components: { 
+        Informacoes,
+        Previcao,
+        Trajeto
+     }
 }
 </script>

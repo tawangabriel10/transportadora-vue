@@ -14,6 +14,7 @@
     "core-js": "^3.4.3",
     "events": "^3.1.0",
     "gerador-validador-cpf": "^4.0.1",
+    "google-maps-api-loader": "^1.1.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "v-currency-field": "^3.0.7",

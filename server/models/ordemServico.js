@@ -126,64 +126,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    idConsignatario: {
-      field: 'id_consignatario',
+    idDadosOpcionais: {
+      field: 'id_dados_opcionais',
       type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    nomeConsignatarioResponsavel: {
-      field: 'nome_consignatario_responsavel',
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    idRedespacho: {
-      field: 'id_redespacho',
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
-    nomeRedespachoResponsavel: {
-      field: 'nome_redespacho_responsavel',
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    valorFrete: {
-      field: 'valor_frete',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    pedagio: {
-      field: 'pedagio',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    adValoragem: {
-      field: 'ad_valoragem',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    seguro: {
-      field: 'seguro',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    outros: {
-      field: 'outros',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    taxaColeta: {
-      field: 'taxa_coleta',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    taxaEntrega: {
-      field: 'taxa_entrega',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
-    valorRedespacho: {
-      field: 'valor_redespacho',
-      type: DataTypes.DOUBLE,
       allowNull: true
     }
   }, {
@@ -230,17 +175,11 @@ module.exports = (sequelize, DataTypes) => {
         toColumn: 'id',
         type: ASSOCIATION_TYPE.MANY_TO_ONE
       },
-      consignatario: {
-        from: 'id_consignatario',
-        to: 'ClienteOuFornecedor',
+      dadosOpcionais: {
+        from: 'id_dados_opcionais',
+        to: 'DadosOpcionais',
         toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
-      },
-      redespacho: {
-        from: 'id_redespacho',
-        to: 'ClienteOuFornecedor',
-        toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
+        type: ASSOCIATION_TYPE.ONE_TO_ONE
       }
     }
   }

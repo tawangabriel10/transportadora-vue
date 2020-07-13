@@ -104,193 +104,243 @@
               </v-col>
             </v-row>
           </v-card-title>
+
           <v-tabs
-            v-model="currentTabAbertura">
-            <v-tab
-              v-for="(tabNome, i) in tabsAbertura"
-              :key="i"
-              :href="`#tab-${i}`"
-            >{{tabNome}}
+            fixed-tabs
+            background-color="blue"
+            dark>
+            <v-tab href="#tab-timeline-gerar-os">
+              Gerar OS
+            </v-tab>
+            <v-tab href="#tab-timeline-cadastrar-cliente">
+              Cadastrar Cliente
+            </v-tab>
+            <v-tab href="#tab-timeline-cadastrar-fornecedor">
+              Cadastrar Fornecedor
+            </v-tab>
+            <v-tab href="#tab-timeline-acertos-de-viagem">
+              Acertos de Viagem
+            </v-tab>
+            <v-tab href="#tab-timeline-mapa-de-viagem">
+              Mapa de Viagem
+            </v-tab>
+            <v-tab href="#tab-timeline-financeiro">
+              Financeiro
+            </v-tab>
+            <v-tab href="#tab-timeline-gerar-cte">
+              Gerar CT-e
+            </v-tab>
+            <v-tab href="#tab-timeline-gerar-mfe">
+              Gerar MF-e
             </v-tab>
 
-            <v-tab-item
-              v-for="(tabNome, i) in tabsAbertura"
-              :key="i"
-              :value="'tab-' + i"
-            >
-              <v-card
-                flat
-                tile
-              >
-                <!-- Ordem de coleta-->
-                <v-card-text v-if="i === 0">
-                  <h3>Geral</h3>
-                  <v-row>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'date', text: 'Data Emissão', value: 'dataEmissao' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'date', text: 'Data de Coleta', value: 'dataColeta' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'text', text: 'Cód. IBGE', value: 'localEmissaoCodIbge' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <v-text-field :value="form.localEmissaoDesc" label="Local de Emissão" disabled/>
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'time', text: 'Hora Limite', value: 'horaLimite' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'text', text: 'Local de coleta', value: 'localColeta' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'text', text: 'Local de entrega', value: 'localEntrega' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'time', text: 'Hora Chamada', value: 'horaChamada' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                    <v-col>
-                      <custom-input
-                        :header="{ type: 'text', text: 'Nome do Solicitante', value: 'nomeSolicitante' }"
-                        :edited-item="form"
-                      />
-                    </v-col>
-                  </v-row>
+            <v-tab-item value="tab-timeline-gerar-os">
 
-                  <v-row>
-                    <v-col cols="6">
-                      <h3>Dados do Remetente</h3>
-                      <v-row>
-                        <v-col>
-                          <v-row>
-                            <v-col>
-                              <v-select
-                                label="Tipo de Cliente"
-                                v-model="dynamicValues.tipoClienteRemetente"
-                                :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
-                              />
-                            </v-col>
-                            <v-col>
-                              <custom-input
-                                v-if="dynamicValues.tipoClienteRemetente && customInputs.remetenteProps"
-                                v-bind="customInputs.remetenteProps"
-                                :edited-item="form"
-                              />
-                            </v-col>
-                            <v-col>
-                              <v-text-field disabled
-                                            label="Nome do Remetente"
-                                            v-if="dynamicValues.tipoClienteRemetente && customInputs.remetenteProps"
-                                            :value="dynamicValues.remetente && dynamicValues.remetente.nome" />
-                            </v-col>
-                          </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                    <v-col cols="6">
-                      <h3>Dados do Destinatário</h3>
-                      <v-row>
-                        <v-col>
-                          <v-row>
-                            <v-col>
-                              <v-select
-                                label="Tipo de Cliente"
-                                v-model="dynamicValues.tipoClienteDestinatario"
-                                :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
-                              />
-                            </v-col>
-                            <v-col>
-                              <custom-input
-                                v-if="dynamicValues.tipoClienteDestinatario && customInputs.destinatarioProps"
-                                v-bind="customInputs.destinatarioProps"
-                                :edited-item="form"
-                              />
-                            </v-col>
-                            <v-col>
-                              <v-text-field disabled
-                                            label="Nome do Destinatário"
-                                            v-if="dynamicValues.tipoClienteDestinatario && customInputs.destinatarioProps"
-                                            :value="dynamicValues.destinatario && dynamicValues.destinatario.nome" />
-                            </v-col>
-                          </v-row>
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-row>
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Gerar nova OS</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Tabs GerarOS -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaGerarOS"
+                        :key="i"
+                        :href="`#tab-gerar-os-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
 
-                  <v-row>
-                    <v-col>
-                      <v-row>
-                        <v-col>
-                          <custom-input
-                            title="Veículo Principal"
-                            v-bind="customInputs.veiculoPrincipalProps"
-                            :edited-item="form"
-                          />
-                        </v-col>
-                        <v-col>
-                          <v-text-field disabled
-                                        label="Descrição"
-                                        v-if="form.idVeiculoPrincipal"
-                                        :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nome" />
-                        </v-col>
-                        <v-col>
-                          <v-text-field disabled
-                                        label="Placa"
-                                        v-if="form.idVeiculoPrincipal"
-                                        :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.placa" />
-                        </v-col>
-                        <v-col>
-                          <v-text-field disabled
-                                        label="Marca/Modelo"
-                                        v-if="form.idVeiculoPrincipal"
-                                        :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.marcaModelo" />
-                        </v-col>
-                        <v-col>
-                          <v-text-field disabled
-                                        label="Tipo do Veículo"
-                                        v-if="form.idVeiculoPrincipal"
-                                        :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.tipoVeiculo && dynamicValues.veiculoPrincipal.tipoVeiculo.nome"
-                          />
-                        </v-col>
-                        <v-col>
-                          <v-text-field disabled
-                                        label="Chassi"
-                                        v-if="form.idVeiculoPrincipal"
-                                        :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
-                          />
-                        </v-col>
-                      </v-row>
-                    </v-col>
-                  </v-row>
+                      <!-- Ordem de coleta-->
+                      <v-tab-item value="tab-gerar-os-0">
+                        <ordem-de-coleta :form="form.ordemDeColeta"></ordem-de-coleta>
+                      </v-tab-item>
+
+                      <!-- Mercadorias -->
+                      <v-tab-item value="tab-gerar-os-1">
+                        <mercadorias :form="form.mercadorias"></mercadorias>
+                      </v-tab-item>
+
+                      <!-- Dados Opcionais -->
+                      <v-tab-item value="tab-gerar-os-2">
+                        <dados-opcionais :form="form.dadosOpcionais"></dados-opcionais>
+                      </v-tab-item>
+
+                      <!-- Ocorrencias -->
+                      <v-tab-item value="tab-gerar-os-3">
+                        <ocorrencias :form="form.ocorrencias"></ocorrencias>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Tabs GerarOS -->
                 </v-card-text>
               </v-card>
             </v-tab-item>
+
+            <v-tab-item value="tab-timeline-cadastrar-cliente">
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Cadastrar Cliente</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Cadastrar Cliente -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaCadastrarCliente"
+                        :key="i"
+                        :href="`#tab-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
+
+                      <!-- Dados Cadastrais Cliente -->
+                      <v-tab-item value="tab-0" >
+                          <dados-cadastrais-cliente></dados-cadastrais-cliente>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Cadastrar Cliente -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+                
+            <v-tab-item value="tab-timeline-cadastrar-fornecedor">
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Cadastrar Fornecedor</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Cadastrar Fornecedor -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaCadastrarFornecedor"
+                        :key="i"
+                        :href="`#tab-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
+
+                      <!-- Dados Cadastrais Fornecedor -->
+                      <v-tab-item value="tab-0">
+                        <dados-cadastrais-fornecedor></dados-cadastrais-fornecedor>
+                      </v-tab-item>
+
+                      <!-- Pagamento, Dados Bancários e Informações Fiscais -->
+                      <v-tab-item value="tab-1">
+                        <pagamento-dados-bancarios-informacoes-fiscais></pagamento-dados-bancarios-informacoes-fiscais>
+                      </v-tab-item>
+
+                      <!-- Serviços e/ou Produtos Prestados -->
+                      <v-tab-item value="tab-2">
+                        <servicos-e-ou-produtos-prestados></servicos-e-ou-produtos-prestados>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Cadastrar Fornecedor -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-timeline-acertos-de-viagem">
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Acerto de Viagem</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Acertos de Viagem -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaAcertosdeViagem"
+                        :key="i"
+                        :href="`#tab-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
+
+                      <!-- Acerto -->
+                      <v-tab-item value="tab-0">
+                        <acerto></acerto>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Acertos de Viagem -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-timeline-mapa-de-viagem">
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Mapa de Viagem</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Mapa de Viagem -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaMapaDeViagem"
+                        :key="i"
+                        :href="`#tab-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
+
+                      <!-- Informações -->
+                      <v-tab-item value="tab-0">
+                        <informacoes></informacoes>
+                      </v-tab-item>
+
+                      <!-- Previsao -->
+                      <v-tab-item value="tab-1">
+                        <previsao></previsao>
+                      </v-tab-item>
+
+                      <!-- Trajeto -->
+                      <v-tab-item value="tab-2">
+                        <trajeto></trajeto>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Mapa de Viagem -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-timeline-financeiro">
+              <v-card flat tile>
+                <v-card-title>
+                    <span class="headline">Financeiro</span>
+                </v-card-title>
+                <v-card-text>
+                    <!-- Financeiro -->
+                    <v-tabs>
+                      <v-tab
+                        v-for="(tabNome, i) in tabsAberturaMapaDeViagem"
+                        :key="i"
+                        :href="`#tab-${i}`"
+                      >{{tabNome}}
+                      </v-tab>
+
+                      <!-- Contabilizacao -->
+                      <v-tab-item value="tab-0">
+                        <contabilizacao></contabilizacao>
+                      </v-tab-item>
+
+                      <!-- Cobranca -->
+                      <v-tab-item value="tab-1">
+                        <cobranca></cobranca>
+                      </v-tab-item>
+
+                    </v-tabs>
+                    <!-- Financeiro -->
+                </v-card-text>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-timeline-gerar-cte">
+              <v-card flat tile>
+
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item value="tab-timeline-gerar-mfe"></v-tab-item>
+
           </v-tabs>
+          
         </v-card-text>
       </v-card>
     </div>
@@ -302,127 +352,32 @@
 
   </div>
 </template>
-<style lang="scss">
-  .manter-os {
-    position: relative;
-    z-index: 0;
 
-    .area-timeline {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      padding-top: 20px;
-      height: 135px;
-
-      .timeline {
-        position: relative;
-        width: 800px;
-        height: 100%;
-        display: flex;
-        justify-content: space-between;
-
-        --color-active: #069;
-
-        &:before {
-          background: #eee;
-          height: 4px;
-          position: absolute;
-          bottom: 80px;
-          left: 0;
-          right: 0;
-          content: '';
-        }
-
-        .start-point, .circle {
-          position: relative;
-          z-index: 10;
-          bottom: -22px;
-          height: 20px;
-          width: 20px;
-          background: #eee;
-          border-radius: 50%;
-        }
-
-        .start-point {
-          background: var(--color-active);
-        }
-
-        .final-point {
-          background: var(--color-active);
-          position: relative;
-
-          &:before {
-            position: absolute;
-            top: 22px;
-            content: '';
-            border-left: 10px solid rgb(0, 102, 153, 1);
-            border-right: 10px solid rgb(0, 102, 153, 0);
-            border-top: 10px solid rgb(0, 102, 153, 0);
-            border-bottom: 10px solid rgb(0, 102, 153, 0);
-          }
-        }
-
-        .hit-area {
-          cursor: pointer;
-          pointer-events: none;
-
-          .circle {
-            > span {
-              z-index: 10;
-              position: absolute;
-              top: 30px;
-              transform: translateX(-36%);
-              color: #ccc;
-
-              &:hover {
-                color: var(--color-active);
-              }
-            }
-          }
-
-          &.active {
-            pointer-events: visible;
-
-            .circle {
-              background: var(--color-active);
-
-              > span {
-                color: #444;
-              }
-
-              &:before {
-                position: absolute;
-                content: '';
-                width: 153px;
-                left: -153px;
-                height: 5px;
-                bottom: 7px;
-                z-index: 0;
-                background: var(--color-active);
-              }
-            }
-          }
-
-          &.current {
-            z-index: 30;
-
-            .circle {
-              span {
-                color: var(--color-active);
-                font-weight: bold;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-</style>
+<style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>
 
 <script>
 import { mapActions } from 'vuex'
-import CustomInput from '../../components/CustomInput'
+import CustomInput from '@/components/CustomInput'
+
+import OrdemDeColeta from '@/pages/Comercial/GerarOS/OrdemDeColeta'
+import Mercadorias from '@/pages/Comercial/GerarOS/Mercadorias'
+import DadosOpcionais from '@/pages/Comercial/GerarOS/DadosOpcionais'
+import Ocorrencias from '@/pages/Comercial/GerarOS/Ocorrencias'
+
+import DadosCadastraisCliente from '@/pages/Comercial/CadastroDeClientes/DadosCadastrais'
+
+import DadosCadastraisFornecedor from '@/pages/Comercial/CadastroDeFornecedor/DadosCadastrais'
+import PagamentoDadosBancariosInformacoesFiscais from '@/pages/Comercial/CadastroDeFornecedor/PagamentoDadosBancariosInformacoesFiscais'
+import ServicosEOuProdutosPrestados from '@/pages/Comercial/CadastroDeFornecedor/ServicosEOuProdutosPrestados'
+
+import Acerto from '@/pages/Logistica/AcertoDeViagem/Acerto'
+
+import Informacoes from '@/pages/Logistica/MapaDeViagem/Informacoes'
+import Previsao from '@/pages/Logistica/MapaDeViagem/Previsao'
+import Trajeto from '@/pages/Logistica/MapaDeViagem/Trajeto'
+
+import Contabilizacao from '@/pages/Financeiro/GerarFatura/Contabilizacao'
+import Cobranca from '@/pages/Financeiro/GerarFatura/Cobranca'
 
 const PFHeaders = [
   { text: 'Nome', value: 'nome' },
@@ -478,7 +433,23 @@ const PJHeaders = [
 ]
 
 export default {
-  components: { CustomInput },
+  components: { 
+    CustomInput,
+    OrdemDeColeta,
+    Mercadorias,
+    DadosOpcionais,
+    Ocorrencias,
+    DadosCadastraisCliente,
+    DadosCadastraisFornecedor,
+    PagamentoDadosBancariosInformacoesFiscais,
+    ServicosEOuProdutosPrestados,
+    Acerto,
+    Informacoes,
+    Previsao,
+    Trajeto,
+    Contabilizacao,
+    Cobranca
+  },
   props: {
     id: {
       type: String,
@@ -487,13 +458,32 @@ export default {
   },
   data () {
     return {
-      currentTabAbertura: 0,
-      tabsAbertura: ['Ordem de Coleta', 'Mercadorias', 'Dados Opcionais'],
+      tabsAberturaTimeline: [
+        'Gerar OS',
+        'Cadastrar Cliente',
+        'Cadastrar Fornecedor',
+        'Acertos de Viagem',
+        'Mapa de Viagem',
+        'Financeiro',
+        'Gerar CT-e',
+        'Gerar MF-e'
+      ],
+      tabsAberturaGerarOS: ['1. Ordem de Coleta', '2. Mercadorias', '3. Dados Opcionais', '4. Ocorrências'],
+      tabsAberturaCadastrarCliente: ['1. Dados Cadastrais'],
+      tabsAberturaCadastrarFornecedor: ['1. Dados Cadastrais', '2. Pagamento, Dados Bancários e Informações Fiscais', '3. Serviços e/ou Produtos Prestados'],
+      tabsAberturaAcertosdeViagem: ['1. Informações'],
+      tabsAberturaMapaDeViagem: ['1. Informações', '2. Previsão', '3. Trajeto'],
+      tabsAberturaFinanceiro: ['1. Contabilização', '2. Cobrança'],
       currentOs: null,
       statusVisualizado: 'ABERTURA',
       statusAtualDaOS: 'ABERTURA',
       todosStatus: ['ABERTURA', 'ABERTO_PRO_OPERACIONAL', 'ABERTO_PRO_FINANCEIRO', 'FECHAMENTO'],
-      form: {},
+      form: {
+        ordemDeColeta: {},
+        mercadorias: {},
+        dadosOpcionais: {},
+        ocorrencias: {}
+      },
       dynamicValues: {
         tipoClienteRemetente: null,
         tipoClienteDestinatario: null,

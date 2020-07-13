@@ -1,200 +1,174 @@
 <template>
-  <div class="manter-os">
-    <!-- Ordem de coleta-->
+    <div>
+      <v-col>
         <h3>Geral</h3>
-        <v-row>
+          <v-row>
             <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'date', text: 'Data Emissão', value: 'dataEmissao' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
             <v-col>
-                <custom-input
-                :header="{ type: 'text', text: 'Cód. IBGE', value: 'localEmissaoCodIbge' }"
-                :edited-item="form"
-                />
-            </v-col>
-            <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'date', text: 'Data de Coleta', value: 'dataColeta' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
             <v-col>
-                <custom-input
+              <custom-input
+                :header="{ type: 'text', text: 'Cód. IBGE', value: 'localEmissaoCodIbge' }"
+                :edited-item="form"
+              />
+            </v-col>
+            <v-col>
+              <v-text-field :value="form.localEmissaoDesc" label="Local de Emissão" disabled/>
+            </v-col>
+            <v-col>
+              <custom-input
                 :header="{ type: 'time', text: 'Hora Limite', value: 'horaLimite' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
-            <!-- <v-col>
-                <v-text-field :value="form.localEmissaoDesc" label="Local de Emissão" disabled/>
-            </v-col> -->
-        </v-row>
-
-        <v-row>
+          </v-row>
+          <v-row>
             <v-col>
-                <custom-input
-                :header="{ type: 'text', text: 'Status', value: 'status' }"
-                :edited-item="form"
-                />
-            </v-col>
-            <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'text', text: 'Local de coleta', value: 'localColeta' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
             <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'text', text: 'Local de entrega', value: 'localEntrega' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
-        </v-row>
-
-        <v-row>
-
             <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'time', text: 'Hora Chamada', value: 'horaChamada' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
             <v-col>
-                <custom-input
+              <custom-input
                 :header="{ type: 'text', text: 'Nome do Solicitante', value: 'nomeSolicitante' }"
                 :edited-item="form"
-                />
+              />
             </v-col>
-        </v-row>
+          </v-row>
 
-        <v-row>
-          <v-col cols="6">
+          <v-row>
+            <v-col cols="6">
               <h3>Dados do Remetente</h3>
               <v-row>
-              <v-col>
+                <v-col>
                   <v-row>
-                      <!-- <v-col>
-                          <v-select
-                          label="Tipo de Cliente"
-                          v-model="dynamicValues.tipoClienteRemetente"
-                          :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
-                          />
-                      </v-col> -->
-                      <v-col>
-                          <custom-input
-                          v-bind="customInputs.remetenteProps"
-                          :edited-item="form"
-                          />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Nome do Remetente"
-                                      v-if="dynamicValues.tipoClienteRemetente && customInputs.remetenteProps"
-                                      :value="dynamicValues.remetente && dynamicValues.remetente.nome" />
-                      </v-col>
+                    <v-col>
+                      <v-select
+                        label="Tipo de Cliente"
+                        v-model="dynamicValues.tipoClienteRemetente"
+                        :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
+                      />
+                    </v-col>
+                    <v-col>
+                      <custom-input
+                        v-if="dynamicValues.tipoClienteRemetente && customInputs.remetenteProps"
+                        v-bind="customInputs.remetenteProps"
+                        :edited-item="form"
+                      />
+                    </v-col>
+                    <v-col>
+                      <v-text-field disabled
+                                    label="Nome do Remetente"
+                                    v-if="dynamicValues.tipoClienteRemetente && customInputs.remetenteProps"
+                                    :value="dynamicValues.remetente && dynamicValues.remetente.nome" />
+                    </v-col>
                   </v-row>
-              </v-col>
-              </v-row>
-          </v-col>
-          <v-col cols="6">
-              <h3>Dados do Destinatário</h3>
-              <v-row>
-                  <v-col>
-                    <v-row>
-                      <!-- <v-col>
-                            <v-select
-                            label="Tipo de Cliente"
-                            v-model="dynamicValues.tipoClienteDestinatario"
-                            :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
-                            />
-                        </v-col> -->
-                        <v-col>
-                            <custom-input
-                            v-bind="customInputs.destinatarioProps"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                        <v-col>
-                            <v-text-field disabled
-                                        label="Nome do Destinatário"
-                                        v-if="dynamicValues.tipoClienteDestinatario && customInputs.destinatarioProps"
-                                        :value="dynamicValues.destinatario && dynamicValues.destinatario.nome" />
-                        </v-col>
-                    </v-row>
                 </v-col>
               </v-row>
-          </v-col>
-        </v-row>
+            </v-col>
+            <v-col cols="6">
+              <h3>Dados do Destinatário</h3>
+              <v-row>
+                <v-col>
+                  <v-row>
+                    <v-col>
+                      <v-select
+                        label="Tipo de Cliente"
+                        v-model="dynamicValues.tipoClienteDestinatario"
+                        :items="[{ text: 'Pessoa Física', value: 'PF' }, { text: 'Pessoa Jurídica', value: 'PJ' }]"
+                      />
+                    </v-col>
+                    <v-col>
+                      <custom-input
+                        v-if="dynamicValues.tipoClienteDestinatario && customInputs.destinatarioProps"
+                        v-bind="customInputs.destinatarioProps"
+                        :edited-item="form"
+                      />
+                    </v-col>
+                    <v-col>
+                      <v-text-field disabled
+                                    label="Nome do Destinatário"
+                                    v-if="dynamicValues.tipoClienteDestinatario && customInputs.destinatarioProps"
+                                    :value="dynamicValues.destinatario && dynamicValues.destinatario.nome" />
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
 
-        <v-row>
-        <v-col>
-          <v-tabs>
-            <v-tab
-              v-for="(tabNome, i) in tabsVeiculo"
-              :key="i"
-              :href="`#tab-${i}`"
-                >{{tabNome}}
-            </v-tab>
-
-            <v-tab-item value="tab-0">
-                <v-card flat tile>
-                  <!-- Ordem de coleta-->
-                  <v-card-text>
-                    <h3>Dados</h3>
-                    <v-row>
-                      <v-col>
-                          <custom-input
-                          title="Veículo Principal"
-                          v-bind="customInputs.veiculoPrincipalProps"
-                          :edited-item="form"
-                          />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Descrição"
-                                      v-if="form.idVeiculoPrincipal"
-                                      :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nome" />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Placa"
-                                      v-if="form.idVeiculoPrincipal"
-                                      :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.placa" />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Marca/Modelo"
-                                      v-if="form.idVeiculoPrincipal"
-                                      :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.marcaModelo" />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Tipo do Veículo"
-                                      v-if="form.idVeiculoPrincipal"
-                                      :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.tipoVeiculo && dynamicValues.veiculoPrincipal.tipoVeiculo.nome"
-                          />
-                      </v-col>
-                      <v-col>
-                          <v-text-field disabled
-                                      label="Chassi"
-                                      v-if="form.idVeiculoPrincipal"
-                                      :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
-                          />
-                      </v-col>
-                    </v-row>
-                </v-card-text>
-              </v-card>
-          </v-tab-item>
-          </v-tabs>
-        </v-col>
-      </v-row>
-  </div>
+          <v-row>
+            <v-col>
+              <v-row>
+                <v-col>
+                  <custom-input
+                    title="Veículo Principal"
+                    v-bind="customInputs.veiculoPrincipalProps"
+                    :edited-item="form"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field disabled
+                                label="Descrição"
+                                v-if="form.idVeiculoPrincipal"
+                                :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nome" />
+                </v-col>
+                <v-col>
+                  <v-text-field disabled
+                                label="Placa"
+                                v-if="form.idVeiculoPrincipal"
+                                :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.placa" />
+                </v-col>
+                <v-col>
+                  <v-text-field disabled
+                                label="Marca/Modelo"
+                                v-if="form.idVeiculoPrincipal"
+                                :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.marcaModelo" />
+                </v-col>
+                <v-col>
+                  <v-text-field disabled
+                                label="Tipo do Veículo"
+                                v-if="form.idVeiculoPrincipal"
+                                :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.tipoVeiculo && dynamicValues.veiculoPrincipal.tipoVeiculo.nome"
+                  />
+                </v-col>
+                <v-col>
+                  <v-text-field disabled
+                                label="Chassi"
+                                v-if="form.idVeiculoPrincipal"
+                                :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
+                  />
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+      </v-col>
+    </div>
 </template>
 
-<style lang="scss" src="./GerarOs.scss">
-</style>
+<style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>>
 
 <script>
 import { mapActions } from 'vuex'
@@ -256,9 +230,9 @@ const PJHeaders = [
 export default {
   components: { CustomInput },
   props: {
-    id: {
-      type: String,
-      required: false
+    form: {
+      type: Object,
+      required: true
     }
   },
   data () {
@@ -270,7 +244,6 @@ export default {
       statusVisualizado: 'ABERTURA',
       statusAtualDaOS: 'ABERTURA',
       todosStatus: ['ABERTURA', 'ABERTO_PRO_OPERACIONAL', 'ABERTO_PRO_FINANCEIRO', 'FECHAMENTO'],
-      form: {},
       dynamicValues: {
         tipoClienteRemetente: null,
         tipoClienteDestinatario: null,

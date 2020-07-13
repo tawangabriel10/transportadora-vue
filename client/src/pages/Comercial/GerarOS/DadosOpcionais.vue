@@ -1,6 +1,6 @@
 <template>
-    <div class="manter-os">
-        <!-- Mercadorias-->
+    <div>
+        <v-col>
             <h3>Dados do Consignatário</h3>
             <v-row>
                 <v-col>
@@ -61,45 +61,19 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Valor do Frete', value: '' }"
+                            :header="{ type: 'text', text: 'Valor do Frete', value: 'valorFrete' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Pedágio', value: '' }"
+                            :header="{ type: 'text', text: 'Pedágio', value: 'pedagio' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Ad-Valorem', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'Seguro', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'Taxa Aérea', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'Taxa Coleta', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'T. Prestação', value: '' }"
+                            :header="{ type: 'text', text: 'Ad-Valorem', value: 'adValoragem' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -107,19 +81,45 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Taxa de Entrega', value: '' }"
+                            :header="{ type: 'text', text: 'Seguro', value: 'seguro' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Redespacho', value: '' }"
+                            :header="{ type: 'text', text: 'Taxa Aérea', value: 'taxaAerea' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Outros', value: '' }"
+                            :header="{ type: 'text', text: 'Taxa Coleta', value: 'taxaColeta' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'T. Prestação', value: 'taxaPrestacao' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'Taxa de Entrega', value: 'taxaEntrega' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'Redespacho', value: 'valorRedespacho' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'Outros', value: 'outros' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -131,13 +131,13 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'date', text: 'Data de Chegada', value: '' }"
+                            :header="{ type: 'date', text: 'Data de Chegada', value: 'dataChegada' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'time', text: 'Hora de Chegada', value: '' }"
+                            :header="{ type: 'time', text: 'Hora de Chegada', value: 'horaChegada' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -145,13 +145,13 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Forma de Pagamento', value: '' }"
+                            :header="{ type: 'text', text: 'Forma de Pagamento', value: 'formaPagamento' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Resp. Pagamento', value: '' }"
+                            :header="{ type: 'text', text: 'Resp. Pagamento', value: 'respPagamento' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -165,25 +165,25 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número de Referência', value: '' }"
+                            :header="{ type: 'text', text: 'Número de Referência', value: 'numeroReferencia' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Valor de Referência', value: '' }"
+                            :header="{ type: 'currency', text: 'Valor de Referência', value: 'valorReferencia' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Conhecimento', value: '' }"
+                            :header="{ type: 'text', text: 'Conhecimento', value: 'conhecimento' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Nota Fiscal', value: '' }"
+                            :header="{ type: 'text', text: 'Nota Fiscal', value: 'notaFiscal' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -191,25 +191,25 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Finalidade do Transporte (Modalidade)', value: '' }"
+                            :header="{ type: 'text', text: 'Finalidade do Transporte (Modalidade)', value: 'finalidadeTransporte' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Material', value: '' }"
+                            :header="{ type: 'text', text: 'Material', value: 'material' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número de Risco', value: '' }"
+                            :header="{ type: 'text', text: 'Número de Risco', value: 'numeroRisco' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número ONU', value: '' }"
+                            :header="{ type: 'text', text: 'Número ONU', value: 'numeroONU' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -223,13 +223,13 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Seguradora', value: '' }"
+                            :header="{ type: 'text', text: 'Seguradora', value: 'seguradora' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número da Apólice', value: '' }"
+                            :header="{ type: 'text', text: 'Número da Apólice', value: 'numeroApolice' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -243,25 +243,25 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número do Contâiner', value: '' }"
+                            :header="{ type: 'text', text: 'Número do Contâiner', value: 'numeroContainer' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Tipo do Contâiner', value: '' }"
+                            :header="{ type: 'text', text: 'Tipo do Contâiner', value: 'tipoContainer' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Navio', value: '' }"
+                            :header="{ type: 'text', text: 'Navio', value: 'navio' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Armador', value: '' }"
+                            :header="{ type: 'text', text: 'Armador', value: 'armador' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -269,50 +269,56 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Booking', value: '' }"
+                            :header="{ type: 'text', text: 'Booking', value: 'booking' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Doc. Aduaneiro', value: '' }"
+                            :header="{ type: 'text', text: 'Doc. Aduaneiro', value: 'docAduaneiro' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'DI/DTA', value: '' }"
+                            :header="{ type: 'text', text: 'DI/DTA', value: 'diDta' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Agência', value: '' }"
+                            :header="{ type: 'text', text: 'Agência', value: 'agencia' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Porto', value: '' }"
+                            :header="{ type: 'text', text: 'Porto', value: 'porto' }"
                             :edited-item="form"
                             />
                         </v-col>
                     </v-row>
                 </v-col>
             </v-row>
+        </v-col>
     </div>
 </template>
 
-<style lang="scss" src="./GerarOs.scss"></style>
+<style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>
 
 <script>
 import CustomInput from '@/components/CustomInput'
 
 export default {
     components: { CustomInput },
+    props: {
+        form: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
-            form: {},
             customInputs: {
                 dadosDoConsignatarioProps: {
                     header: {

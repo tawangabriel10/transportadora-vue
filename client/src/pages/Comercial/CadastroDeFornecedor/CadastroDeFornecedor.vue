@@ -1,49 +1,53 @@
 <template>
     <div class="manter-os">
 
-        <v-btn color="dark" @click="showDialogFornecedores" dark>Cadastro de Fornecedores</v-btn>
+        <v-dialog v-model="showDialog" max-width="1000px">
+            <v-card flat title>
+                <v-card-title>
+                    <span class="headline">Cadastro de Fornecedor</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-tabs>
+                        <v-tab
+                        href="#tab-dados-cadastrais"
+                            >1. Dados Cadastrais
+                        </v-tab>
+                        <v-tab
+                        href="#tab-pamento-dados-bancarios-informacoes-fiscais"
+                            >2. Pagamento, Dados Bancários e Informações Fiscais
+                        </v-tab>
+                        <v-tab
+                        href="#tab-servicos-produtos-prestados"
+                            >3. Serviços e/ou Produtos Prestados
+                        </v-tab>
 
-        <v-dialog v-model="showDialog" max-width="1000px" max-heigth="1000px">
-            <div>
-                <v-tabs>
-                    <v-tab
-                    href="#tab-dados-cadastrais"
-                        >1. Dados Cadastrais
-                    </v-tab>
-                    <v-tab
-                    href="#tab-pamento-dados-bancarios-informacoes-fiscais"
-                        >2. Pagamento, Dados Bancários e Informações Fiscais
-                    </v-tab>
-                    <v-tab
-                    href="#tab-servicos-produtos-prestados"
-                        >3. Serviços e/ou Produtos Prestados
-                    </v-tab>
-
-                    <v-tab-item value="tab-dados-cadastrais">
-                        <v-card flat tile>
+                        <v-tab-item value="tab-dados-cadastrais">
 
                             <dados-cadastrais></dados-cadastrais>
 
-                        </v-card>
-                    </v-tab-item>
+                        </v-tab-item>
 
-                    <v-tab-item value="tab-pamento-dados-bancarios-informacoes-fiscais">
-                        <v-card flat tile>
+                        <v-tab-item value="tab-pamento-dados-bancarios-informacoes-fiscais">
 
                             <pagamento-dados-bancarios-informacoes-fiscais></pagamento-dados-bancarios-informacoes-fiscais>
 
-                        </v-card>
-                    </v-tab-item>
+                        </v-tab-item>
 
-                    <v-tab-item value="tab-servicos-produtos-prestados">
-                        <v-card flat tile>
+                        <v-tab-item value="tab-servicos-produtos-prestados">
 
                             <servicos-e-ou-produtos-prestados></servicos-e-ou-produtos-prestados>
 
-                        </v-card>
-                    </v-tab-item>
-                </v-tabs>
-            </div>
+                        </v-tab-item>
+                    </v-tabs>
+                </v-card-text>
+
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="dialog = false">Cancelar</v-btn>
+                    <v-btn color="blue" @click="dialog = false">Cadastrar</v-btn>
+                </v-card-actions>
+            </v-card>
+
         </v-dialog>
     </div>
 </template>
@@ -61,13 +65,11 @@ export default {
     },
     data() {
         return {
-            showDialog: false
+            showDialog: true
         }
     },
     methods: {
-        showDialogFornecedores() {
-            this.showDialog = true
-        }
+
     }
 }
 </script>

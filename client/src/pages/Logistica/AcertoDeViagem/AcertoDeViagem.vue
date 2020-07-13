@@ -1,30 +1,29 @@
 <template>
     <div class="manter-os">
 
-        <v-dialog v-model="showDialog" max-width="1000px">
+        <v-dialog v-model="showDialog" max-width="1000px" max-heigth="1000px">
             <v-card flat title>
                 <v-card-title>
-                    <span class="headline">Cadastro de Clientes</span>
+                    <span class="headline">Acerto de Viagem</span>
                 </v-card-title>
                 <v-card-text>
                     <v-tabs>
                         <v-tab
-                        href="#tab-dados-cadastrais"
-                            >1. Dados Cadastrais
+                            href="#tab-acerto"
+                            >1. Informações
                         </v-tab>
 
-                        <v-tab-item value="tab-dados-cadastrais">
-
-                            <dados-cadastrais></dados-cadastrais>
-                        
+                        <v-tab-item value="tab-acerto">
+                            <acerto></acerto>     
                         </v-tab-item>
+
                     </v-tabs>
                 </v-card-text>
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="showDialog = false">Cancelar</v-btn>
-                    <v-btn color="blue" @click="showDialog = false">Cadastrar</v-btn>
+                    <v-btn @click="dialog = false">Cancelar</v-btn>
+                    <v-btn color="blue" @click="dialog = false">Cadastrar</v-btn>
                 </v-card-actions>
             </v-card>
 
@@ -35,17 +34,14 @@
 <style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>
 
 <script>
-import DadosCadastrais from '@/pages/Comercial/CadastroDeClientes/DadosCadastrais'
+import Acerto from '@/pages/Logistica/AcertoDeViagem/Acerto'
 
 export default {
-    components: { DadosCadastrais },
+    components: { Acerto },
     data() {
         return {
             showDialog: true
         }
     },
-    methods: {
-
-    }
 }
 </script>

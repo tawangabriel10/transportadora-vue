@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-col>
-            <h3>Despesas</h3>
+            <h3>Despesas Gastas</h3>
             <v-row>
                 <v-col>
                     <custom-input
@@ -82,6 +82,18 @@
                     </v-row>
                 </v-col>
             </v-row>
+
+            <v-row>
+                <v-col>
+                    <h3>Anexos</h3>
+                    <v-row>
+                        <v-col>
+                            <h3>Anexo de Documentos, comprovantes, notas fiscais...</h3>
+                            <input type="file" @change="processFile($event)">
+                        </v-col>
+                    </v-row>
+                </v-col>
+            </v-row>
         </v-col>
     </div>
 </template>
@@ -90,11 +102,18 @@
 import CustomInput from '@/components/CustomInput'
 
 export default {
-    components: { CustomInput },
+    components: {
+        CustomInput
+    },
     data() {
         return {
             form: {}
         }
     },
+    methods: {
+        processFile(event) {
+
+        }
+    }
 }
 </script>

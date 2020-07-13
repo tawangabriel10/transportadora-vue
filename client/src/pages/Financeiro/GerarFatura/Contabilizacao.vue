@@ -1,17 +1,11 @@
 <template>
     <div>
         <v-col>
-            <h3>Geral</h3>
+            <h3>Total de Gastos</h3>
             <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Razão Social', value: 'nome' }"
-                    :edited-item="form"
-                    />
-                </v-col>
-                <v-col>
-                    <custom-input
-                    :header="{ type: 'text', text: 'Nome Fantasia', value: 'nome' }"
+                    :header="{ type: 'currency', text: 'R$', value: 'total' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -19,86 +13,65 @@
 
             <v-row>
                 <v-col>
-                    <custom-input
-                    :header="{ type: 'text', text: 'CPF/CNPJ', value: 'nome' }"
-                    :edited-item="form"
-                    />
-                </v-col>
-                <v-col>
-                    <custom-input
-                    :header="{ type: 'text', text: 'Inscrição Estadual', value: 'nome' }"
-                    :edited-item="form"
-                    />
-                </v-col>
-                <v-col>
-                    <custom-input
-                    :header="{ type: 'text', text: 'Inscrição Municipal', value: 'nome' }"
-                    :edited-item="form"
-                    />
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col>
-                    <custom-input
-                    :header="{ type: 'text', text: 'Inscrição na SUFRAMA', value: 'nome' }"
-                    :edited-item="form"
-                    />
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col>
-                    <h3>Localização</h3>
+                    <h3>Informações</h3>
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Endereço conforme CNPJ', value: '' }"
+                            :header="{ type: 'text', text: 'Nome', value: 'nomeCobranca' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Complemento', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'Número', value: '' }"
+                            :header="{ type: 'text', text: 'Email', value: 'emailCobranca' }"
                             :edited-item="form"
                             />
                         </v-col>
                     </v-row>
-
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'CEP', value: '' }"
+                            :header="{ type: 'text', text: 'Endereço do Cliente', value: 'enderecoClienteCobranca' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Bairro', value: '' }"
+                            :header="{ type: 'date', text: 'Data da Fatura', value: 'dataFaturaInformacoes' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Estado', value: '' }"
+                            :header="{ type: 'number', text: 'Número da Fatura', value: 'numeroFaturaInformacoes' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'Cidade', value: 'cidade' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Cidade', value: '' }"
+                            :header="{ type: 'text', text: 'CEP', value: 'cep' }"
+                            :edited-item="form"
+                            />
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                            <custom-input
+                            :header="{ type: 'text', text: 'País', value: 'pais' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'País', value: '' }"
+                            :header="{ type: 'text', text: 'Estado', value: 'estado' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -108,47 +81,37 @@
 
             <v-row>
                 <v-col>
-                    <h3>Contatos</h3>
+                    <h3>Cobrança</h3>
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Contato Comercial', value: '' }"
+                            :header="{ type: 'text', text: 'Nome', value: 'nome' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Contato Financeiro', value: '' }"
+                            :header="{ type: 'text', text: 'Email', value: 'email' }"
                             :edited-item="form"
                             />
                         </v-col>
                     </v-row>
-
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Telefone - Contato Comercial', value: '' }"
+                            :header="{ type: 'text', text: 'Endereço do Cliente', value: 'enderecoCliente' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Telefone - Contato Financeiro', value: '' }"
-                            :edited-item="form"
-                            />
-                        </v-col>
-                    </v-row>
-
-                    <v-row>
-                        <v-col>
-                            <custom-input
-                            :header="{ type: 'text', text: 'Email - Contato Comercial', value: '' }"
+                            :header="{ type: 'date', text: 'Data da Fatura', value: 'dataFaturaInformacoes' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Email - Contato Financeiro', value: '' }"
+                            :header="{ type: 'text', text: 'Número da Fatura', value: 'numeroFaturaCobranca' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -168,9 +131,6 @@ export default {
         return {
             form: {}
         }
-    },
-    methods: {
-        
     },
 }
 </script>

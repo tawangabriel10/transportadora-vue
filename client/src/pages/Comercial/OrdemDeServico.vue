@@ -10,15 +10,19 @@
           :on-click-edit-row="onClickEditRow"
     >
     </crud>
+
+    <modal-gerar-o-s :showDialog="showDialog"></modal-gerar-o-s>
   </div>
 </template>
 
 <script>
 import Crud from '@/components/Crud'
+import ModalGerarOS from '@/pages/Comercial/GerarOS/ModalGerarOS'
 
 export default {
   components: {
-    Crud
+    Crud,
+    ModalGerarOS
   },
   data () {
     return {
@@ -38,12 +42,14 @@ export default {
         { text: 'Nome Destinatario', type: 'virtual', value: 'nomeRemetenteContatoResponsavel' },
         { text: 'Remetente', value: 'idRemetente', lookup: 'clienteOuFornecedor', hide: true },
         { text: 'Ações', value: 'action', sortable: true },
-      ]
+      ],
+      showDialog: false
     }
   },
   methods: {
     async onClickAdicionar () {
-      await this.$router.push({ path: `/comercial/ordem-de-servico` })
+      //await this.$router.push({ path: `/comercial/ordem-de-servico` })
+      this.showDialog = true
     },
     async onClickEditRow (row) {
       await this.$router.push({ path: `/comercial/ordem-de-servico/${row.id}` })

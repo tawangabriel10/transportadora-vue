@@ -4,13 +4,6 @@
       <modal-gerar-o-s></modal-gerar-o-s>
     </div>
 
-    <div>
-      <cadastro-de-clientes></cadastro-de-clientes>
-    </div>
-
-    <div>
-      <cadastro-de-fornecedor></cadastro-de-fornecedor>
-    </div>
   </div>
 </template>
 

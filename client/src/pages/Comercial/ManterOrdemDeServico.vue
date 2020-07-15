@@ -193,7 +193,7 @@
 
                       <!-- Dados Cadastrais Cliente -->
                       <v-tab-item value="tab-0" >
-                          <dados-cadastrais-cliente></dados-cadastrais-cliente>
+                          <dados-cadastrais-cliente :form="form.cliente.dadosCadastrais"></dados-cadastrais-cliente>
                       </v-tab-item>
 
                     </v-tabs>
@@ -219,17 +219,17 @@
 
                       <!-- Dados Cadastrais Fornecedor -->
                       <v-tab-item value="tab-0">
-                        <dados-cadastrais-fornecedor></dados-cadastrais-fornecedor>
+                        <dados-cadastrais-fornecedor :form="form.fornecedor.dadosCadastrais"></dados-cadastrais-fornecedor>
                       </v-tab-item>
 
                       <!-- Pagamento, Dados Bancários e Informações Fiscais -->
                       <v-tab-item value="tab-1">
-                        <pagamento-dados-bancarios-informacoes-fiscais></pagamento-dados-bancarios-informacoes-fiscais>
+                        <pagamento-dados-bancarios-informacoes-fiscais :form="form.fornecedor.pagamentoDadosBancarios"></pagamento-dados-bancarios-informacoes-fiscais>
                       </v-tab-item>
 
                       <!-- Serviços e/ou Produtos Prestados -->
                       <v-tab-item value="tab-2">
-                        <servicos-e-ou-produtos-prestados></servicos-e-ou-produtos-prestados>
+                        <servicos-e-ou-produtos-prestados :form="form.fornecedor.servicosProdutosPrestados"></servicos-e-ou-produtos-prestados>
                       </v-tab-item>
 
                     </v-tabs>
@@ -364,9 +364,9 @@ import Mercadorias from '@/pages/Comercial/GerarOS/Mercadorias'
 import DadosOpcionais from '@/pages/Comercial/GerarOS/DadosOpcionais'
 import Ocorrencias from '@/pages/Comercial/GerarOS/Ocorrencias'
 
-import DadosCadastraisCliente from '@/pages/Comercial/CadastroDeClientes/DadosCadastrais'
+import DadosCadastraisCliente from '@/pages/Comercial/CadastroDeClientes/DadosCadastraisCliente'
 
-import DadosCadastraisFornecedor from '@/pages/Comercial/CadastroDeFornecedor/DadosCadastrais'
+import DadosCadastraisFornecedor from '@/pages/Comercial/CadastroDeFornecedor/DadosCadastraisFornecedor'
 import PagamentoDadosBancariosInformacoesFiscais from '@/pages/Comercial/CadastroDeFornecedor/PagamentoDadosBancariosInformacoesFiscais'
 import ServicosEOuProdutosPrestados from '@/pages/Comercial/CadastroDeFornecedor/ServicosEOuProdutosPrestados'
 
@@ -482,7 +482,15 @@ export default {
         ordemDeColeta: {},
         mercadorias: {},
         dadosOpcionais: {},
-        ocorrencias: {}
+        ocorrencias: {},
+        cliente: {
+          dadosCadastrais: {},
+        },
+        fornecedor: {
+          dadosCadastrais: {},
+          pagamentoDadosBancarios: {},
+          servicosProdutosPrestados: {}
+        }
       },
       dynamicValues: {
         tipoClienteRemetente: null,

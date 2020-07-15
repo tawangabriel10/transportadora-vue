@@ -15,7 +15,7 @@
 
                         <v-tab-item value="tab-dados-cadastrais">
 
-                            <dados-cadastrais :form="form.dadosCadastrais"></dados-cadastrais>
+                            <dados-cadastrais-cliente :form="form.dadosCadastrais"></dados-cadastrais-cliente>
                         
                         </v-tab-item>
                     </v-tabs>
@@ -35,10 +35,10 @@
 <style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>
 
 <script>
-import DadosCadastrais from '@/pages/Comercial/CadastroDeClientes/DadosCadastrais'
+import DadosCadastraisCliente from '@/pages/Comercial/CadastroDeClientes/DadosCadastraisCliente'
 
 export default {
-    components: { DadosCadastrais },
+    components: { DadosCadastraisCliente },
     data() {
         return {
             showDialog: true,

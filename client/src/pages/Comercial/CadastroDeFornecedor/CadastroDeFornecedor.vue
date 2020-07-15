@@ -23,7 +23,7 @@
 
                         <v-tab-item value="tab-dados-cadastrais">
 
-                            <dados-cadastrais :form="form.dadosCadastrais"></dados-cadastrais>
+                            <dados-cadastrais-fornecedor :form="form.dadosCadastrais"></dados-cadastrais-fornecedor>
 
                         </v-tab-item>
 
@@ -53,13 +53,13 @@
 </template>
 
 <script>
-import DadosCadastrais from '@/pages/Comercial/CadastroDeFornecedor/DadosCadastrais'
+import DadosCadastraisFornecedor from '@/pages/Comercial/CadastroDeFornecedor/DadosCadastraisFornecedor'
 import PagamentoDadosBancariosInformacoesFiscais from '@/pages/Comercial/CadastroDeFornecedor/PagamentoDadosBancariosInformacoesFiscais'
 import ServicosEOuProdutosPrestados from '@/pages/Comercial/CadastroDeFornecedor/ServicosEOuProdutosPrestados'
 
 export default {
     components: {
-        DadosCadastrais,
+        DadosCadastraisFornecedor,
         PagamentoDadosBancariosInformacoesFiscais,
         ServicosEOuProdutosPrestados
     },

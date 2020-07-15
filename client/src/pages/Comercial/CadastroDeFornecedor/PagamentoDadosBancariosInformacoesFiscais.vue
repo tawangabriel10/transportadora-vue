@@ -97,9 +97,14 @@ import CustomInput from '@/components/CustomInput'
 
 export default {
     components: { CustomInput },
+    props: {
+        form: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
-            form: {}
         }
     },
 }

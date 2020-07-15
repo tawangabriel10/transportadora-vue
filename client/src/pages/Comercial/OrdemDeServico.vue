@@ -11,7 +11,7 @@
     >
     </crud>
 
-    <modal-gerar-o-s :showDialog="showDialog"></modal-gerar-o-s>
+    <modal-gerar-o-s :show-dialog="showDialog"></modal-gerar-o-s>
   </div>
 </template>
 

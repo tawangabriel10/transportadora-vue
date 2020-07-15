@@ -7,7 +7,7 @@
                     <span class="headline">Gerar nova OS</span>
                 </v-card-title>
                 <v-card-text>
-                    <v-tabs>
+                    <v-tabs v-model="currentTab">
                         <v-tab
                         href="#tab-ordem-de-coleta"
                             >1. Ordem de Coleta
@@ -40,15 +40,16 @@
                             <dados-opcionais :form="form.dadosOpcionais"></dados-opcionais>
                         </v-tab-item>
 
-                        <v-tab-item value="ocorrencias">
+                        <v-tab-item value="tab-ocorrencias">
                             <ocorrencias :form="form.ocorrencias"></ocorrencias>
                         </v-tab-item>
                     </v-tabs>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn @click="dialog = false">Cancelar</v-btn>
-                    <v-btn color="blue" @click="onAvancarDados">Cadastrar</v-btn>
+                    <v-btn @click="showDialog = false">Cancelar</v-btn>
+                    <v-btn color="blue" :disabled="currentTab === 'tab-ordem-de-coleta'" @click="onVoltarDados">Voltar</v-btn>
+                    <v-btn color="blue" :disabled="currentTab === 'tab-ocorrencias'" @click="onAvancarDados">Avançar</v-btn>
                 </v-card-actions>
             </v-card>
 
@@ -63,6 +64,11 @@ import OrdemDeColeta from '@/pages/Comercial/GerarOS/OrdemDeColeta'
 import Mercadorias from '@/pages/Comercial/GerarOS/Mercadorias'
 import DadosOpcionais from '@/pages/Comercial/GerarOS/DadosOpcionais'
 import Ocorrencias from '@/pages/Comercial/GerarOS/Ocorrencias'
+
+const TAB_ORDEM_DE_COLETA = 'tab-ordem-de-coleta';
+const TAB_MERCADORIAS = 'tab-mercadorias';
+const TAB_DADOS_OPCIONAIS = 'tab-dados-opcionais';
+const TAB_OCORRENCIAS = 'tab-ocorrencias';
 
 export default {
     components: { 
@@ -84,15 +90,30 @@ export default {
                 mercadorias: {},
                 dadosOpcionais: {},
                 ocorrencias: {}
-            }
+            },
+            currentTab: TAB_ORDEM_DE_COLETA
         }
     },
     methods: {
-        showDialogOS() {
-            this.showDialog = true
+        onVoltarDados() {
+            if (this.currentTab === TAB_OCORRENCIAS) {
+                this.currentTab = TAB_DADOS_OPCIONAIS
+            } else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
+                this.currentTab = TAB_MERCADORIAS
+            } else if (this.currentTab === TAB_MERCADORIAS) {
+                this.currentTab = TAB_ORDEM_DE_COLETA
+            }
+            console.log('Tab Atual: ', this.currentTab)
         },
         onAvancarDados() {
-            console.log('Form Dados: ', this.form);
+            if (this.currentTab === TAB_ORDEM_DE_COLETA) {
+                this.currentTab = TAB_MERCADORIAS
+            } else if (this.currentTab === TAB_MERCADORIAS) {
+                this.currentTab = TAB_DADOS_OPCIONAIS
+            } else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
+                this.currentTab = TAB_OCORRENCIAS
+            }
+            console.log('Tab Atual: ', this.currentTab)
         }
     }
 }

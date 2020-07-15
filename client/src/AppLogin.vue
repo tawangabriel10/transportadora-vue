@@ -21,9 +21,7 @@
               v-model="form.password"
               required
               append-icon="mdi mdi-key-variant"/>
-            <select v-model="form.idEmpresa">
-              <option :key="`empresa-${item.id}`" v-for="item in empresas" :value="item.id">{{item.nome}}</option>
-            </select>
+
             <v-alert
               v-show="!validLogin"
               dense
@@ -79,27 +77,17 @@ export default {
       validLogin: true,
       form: {
         username: null,
-        password: null,
-        idEmpresa: null
-      },
-      empresas: []
+        password: null
+      }
     }
   },
   async mounted () {
     this.validLogin = true
-    this.empresas = await this.find({
-      entity: 'empresas',
-      updateState: false
-    })
   },
   methods: {
-    ...mapActions('Crud', ['find', 'seCurrentEmpresa']),
     ...mapActions('Login', ['loginAction']),
     async doLogin () {
       try {
-        if (!this.form.idEmpresa) {
-          throw new CustomError('É obrigatório escolher uma empresa')
-        }
         this.msgError = ''
         this.validLogin = true
         await this.loginAction(this.form)

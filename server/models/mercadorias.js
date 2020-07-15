@@ -86,6 +86,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    produtoTransportado: {
+      field: 'produto_transportado',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     tara: {
       field: 'tara',
       type: DataTypes.STRING,

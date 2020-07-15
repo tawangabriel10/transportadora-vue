@@ -1,7 +1,7 @@
 <template>
     <div>
       <v-col>
-        <h3>Geral</h3>
+        <h3>Dados Gerais</h3>
           <v-row>
             <v-col>
               <custom-input

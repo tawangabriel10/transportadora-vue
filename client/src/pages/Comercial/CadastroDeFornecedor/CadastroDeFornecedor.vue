@@ -23,19 +23,19 @@
 
                         <v-tab-item value="tab-dados-cadastrais">
 
-                            <dados-cadastrais></dados-cadastrais>
+                            <dados-cadastrais :form="form.dadosCadastrais"></dados-cadastrais>
 
                         </v-tab-item>
 
                         <v-tab-item value="tab-pamento-dados-bancarios-informacoes-fiscais">
 
-                            <pagamento-dados-bancarios-informacoes-fiscais></pagamento-dados-bancarios-informacoes-fiscais>
+                            <pagamento-dados-bancarios-informacoes-fiscais :form="form.pagamentoDadosBancarios"></pagamento-dados-bancarios-informacoes-fiscais>
 
                         </v-tab-item>
 
                         <v-tab-item value="tab-servicos-produtos-prestados">
 
-                            <servicos-e-ou-produtos-prestados></servicos-e-ou-produtos-prestados>
+                            <servicos-e-ou-produtos-prestados :form="form.servicosProdutosPrestados"></servicos-e-ou-produtos-prestados>
 
                         </v-tab-item>
                     </v-tabs>
@@ -65,7 +65,12 @@ export default {
     },
     data() {
         return {
-            showDialog: true
+            showDialog: true,
+            form: {
+                dadosCadastrais: {},
+                pagamentoDadosBancarios: {},
+                servicosProdutosPrestados: {}
+            }
         }
     },
     methods: {

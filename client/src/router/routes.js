@@ -109,6 +109,7 @@ const routes = [
         component: TesteComercial,
         meta: {
           icon: 'mdi mdi-account-tie',
+          hideFromMenu: true,
           title: 'Teste Comercial',
           userPerfil: ['ADM']
         }

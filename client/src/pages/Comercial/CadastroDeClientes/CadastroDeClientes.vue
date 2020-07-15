@@ -15,7 +15,7 @@
 
                         <v-tab-item value="tab-dados-cadastrais">
 
-                            <dados-cadastrais></dados-cadastrais>
+                            <dados-cadastrais :form="form.dadosCadastrais"></dados-cadastrais>
                         
                         </v-tab-item>
                     </v-tabs>
@@ -24,7 +24,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn @click="showDialog = false">Cancelar</v-btn>
-                    <v-btn color="blue" @click="showDialog = false">Cadastrar</v-btn>
+                    <v-btn color="blue" @click="onCadastrar">Cadastrar</v-btn>
                 </v-card-actions>
             </v-card>
 
@@ -41,11 +41,16 @@ export default {
     components: { DadosCadastrais },
     data() {
         return {
-            showDialog: true
+            showDialog: true,
+            form: {
+                dadosCadastrais: {}
+            }
         }
     },
     methods: {
+        onCadastrar() {
 
+        }
     }
 }
 </script>

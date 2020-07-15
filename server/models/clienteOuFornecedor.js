@@ -101,6 +101,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    status: {
+      field: 'status',
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     cep: {
       field: 'cep',
       type: DataTypes.STRING,
@@ -123,6 +128,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     enderecoGeradoCidade: {
       field: 'endereco_gerado_cidade',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    enderecoGeradoEstado: {
+      field: 'endereco_gerado_estado',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    enderecoGeradoPais: {
+      field: 'endereco_gerado_pais',
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -203,6 +218,36 @@ module.exports = (sequelize, DataTypes) => {
     },
     contribuicaoIcms: {
       field: 'contribuicao_icms',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoComercial: {
+      field: 'contato_comercial',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoFinanceiro: {
+      field: 'contato_financeiro',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoTelefoneComercial: {
+      field: 'contato_telefone_comercial',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoTelefoneFinanceiro: {
+      field: 'contato_telefone_financeiro',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoEmailComercial: {
+      field: 'contato_email_comercial',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoEmailFinanceiro: {
+      field: 'contato_email_financeiro',
       type: DataTypes.STRING,
       allowNull: true
     },

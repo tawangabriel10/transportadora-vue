@@ -27,18 +27,18 @@
                     :edited-item="form"
                     />
                 </v-col>
-            </v-row>
-
-            <v-row>
                 <v-col>
                     <custom-input
                     :header="{ type: 'text', text: 'Cubagem', value: 'cubagem' }"
                     :edited-item="form"
                     />
                 </v-col>
+            </v-row>
+
+            <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Número Nota Fiscal', value: 'nNotaFiscal' }"
+                    :header="{ type: 'text', text: 'Nº Nota Fiscal', value: 'nNotaFiscal' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -74,7 +74,7 @@
             <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Produto Transportado', value: '' }"
+                    :header="{ type: 'text', text: 'Produto Transportado', value: 'produtoTransportado' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -95,7 +95,7 @@
             <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Observações', value: 'observacoes' }"
+                    :header="{ type: 'textarea', text: 'Observações', value: 'observacoes' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -111,9 +111,15 @@ import CustomInput from '@/components/CustomInput'
 
 export default {
     components: { CustomInput },
+    props: {
+        form: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
-            form: {},
+            
         }
     },
     methods: {

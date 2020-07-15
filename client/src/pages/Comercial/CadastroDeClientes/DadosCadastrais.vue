@@ -20,25 +20,25 @@
             <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'RG', value: '' }"
+                    :header="{ type: 'text', text: 'RG', value: 'rg' }"
                     :edited-item="form"
                     />
                 </v-col>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'CPF', value: '' }"
+                    :header="{ type: 'text', text: 'CPF', value: 'cpf' }"
                     :edited-item="form"
                     />
                 </v-col>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Telefone', value: '' }"
+                    :header="{ type: 'text', text: 'Telefone', value: 'telefone' }"
                     :edited-item="form"
                     />
                 </v-col>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Celular', value: '' }"
+                    :header="{ type: 'text', text: 'Celular', value: 'telefoneCelular' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -47,13 +47,13 @@
             <v-row>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Email', value: '' }"
+                    :header="{ type: 'text', text: 'Email', value: 'email' }"
                     :edited-item="form"
                     />
                 </v-col>
                 <v-col>
                     <custom-input
-                    :header="{ type: 'text', text: 'Nascimento', value: '' }"
+                    :header="{ type: 'text', text: 'Nascimento', value: 'dataNascimento' }"
                     :edited-item="form"
                     />
                 </v-col>
@@ -65,13 +65,13 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Endereço', value: '' }"
+                            :header="{ type: 'text', text: 'Endereço', value: 'enderecoGeradoPeloCep' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Complemento', value: '' }"
+                            :header="{ type: 'text', text: 'Complemento', value: 'enderecoComplemento' }"
                             :edited-item="form"
                             />
                         </v-col>
@@ -79,31 +79,31 @@
                     <v-row>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Número', value: '' }"
+                            :header="{ type: 'text', text: 'Número', value: 'enderecoNumero' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Bairro', value: '' }"
+                            :header="{ type: 'text', text: 'Bairro', value: 'enderecoBairro' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Estado', value: '' }"
+                            :header="{ type: 'text', text: 'Estado', value: 'enderecoGeradoEstado' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'Cidade', value: '' }"
+                            :header="{ type: 'text', text: 'Cidade', value: 'enderecoGeradoCidade' }"
                             :edited-item="form"
                             />
                         </v-col>
                         <v-col>
                             <custom-input
-                            :header="{ type: 'text', text: 'País', value: '' }"
+                            :header="{ type: 'text', text: 'País', value: 'enderecoGeradoPais' }"
                             :edited-item="form"
                             />
                         </v-col>

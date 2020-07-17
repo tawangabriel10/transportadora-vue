@@ -65,6 +65,8 @@ import Mercadorias from '@/pages/Comercial/GerarOS/Mercadorias'
 import DadosOpcionais from '@/pages/Comercial/GerarOS/DadosOpcionais'
 import Ocorrencias from '@/pages/Comercial/GerarOS/Ocorrencias'
 
+import { mapActions } from 'vuex'
+
 const TAB_ORDEM_DE_COLETA = 'tab-ordem-de-coleta';
 const TAB_MERCADORIAS = 'tab-mercadorias';
 const TAB_DADOS_OPCIONAIS = 'tab-dados-opcionais';
@@ -95,6 +97,7 @@ export default {
         }
     },
     methods: {
+        ...mapActions('OrdemDeServico', ['loginAction']),
         onVoltarDados() {
             if (this.currentTab === TAB_OCORRENCIAS) {
                 this.currentTab = TAB_DADOS_OPCIONAIS

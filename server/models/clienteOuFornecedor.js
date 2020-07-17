@@ -255,6 +255,16 @@ module.exports = (sequelize, DataTypes) => {
       field: 'id_cfop',
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    idPagamentoDadosBancarios: {
+      field: 'id_pagamento_dados_bancarios',
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    idServicosProdutos: {
+      field: 'id_servicos_produtos',
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     tableName: 'tb_cliente_ou_fornecedor',
@@ -293,6 +303,18 @@ module.exports = (sequelize, DataTypes) => {
         from: 'id',
         to: 'OrdemServico',
         toColumn: 'id_redespacho',
+        type: ASSOCIATION_TYPE.ONE_TO_MANY
+      },
+      pagamentoDadosBancarios: {
+        from: 'id',
+        to: 'PagamentoDadosBancarios',
+        toColumn: 'id_pagamento_dados_bancarios',
+        type: ASSOCIATION_TYPE.ONE_TO_MANY
+      },
+      servicosProdutos: {
+        from: 'id',
+        to: 'ServicosProdutos',
+        toColumn: 'id_servicos_produtos',
         type: ASSOCIATION_TYPE.ONE_TO_MANY
       }
     }

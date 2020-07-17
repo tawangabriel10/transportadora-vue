@@ -87,20 +87,9 @@ module.exports = (sequelize, DataTypes) => {
 })
 
 PagamentoDadosBancariosModel.appDefinitions = {
-  autoCrud: true,
+  autoCrud: false,
   associations: {
-    naturezaCarga: {
-      from: 'id_natureza_carga',
-      to: 'NaturezaCarga',
-      toColumn: 'id',
-      type: ASSOCIATION_TYPE.MANY_TO_ONE
-    },
-    ordemServico: {
-      from: 'id_ordem_servico',
-      to: 'OrdemServico',
-      toColumn: 'id',
-      type: ASSOCIATION_TYPE.MANY_TO_ONE
-    }
+
   }
 }
 

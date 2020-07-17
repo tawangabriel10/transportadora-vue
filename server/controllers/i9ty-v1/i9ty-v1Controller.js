@@ -21,6 +21,22 @@ module.exports = {
           required: true
         }
       }
+    },
+    {
+      action: 'ordemServico',
+      path: '/ordem-servico',
+      description: 'Rota reponsável por consultar ordem de serviço',
+      methods: [HttpMethods.GET],
+      params: {
+        dataEmissao: {
+          type: 'string',
+          required: false
+        },
+        codigoIbge: {
+          type: 'string',
+          required: false
+        }
+      }
     }
   ]
 }

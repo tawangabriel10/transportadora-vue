@@ -10,18 +10,6 @@ module.exports = {
                         add column produto_transportado varchar;
 
 
-                    alter table gestao.tb_cliente_ou_fornecedor
-                        add column status varchar,
-                        add column endereco_gerado_estado varchar,
-                        add column endereco_gerado_pais varchar,
-                        add column contato_comercial varchar,
-                        add column contato_financeiro varchar,
-                        add column contato_telefone_comercial varchar,
-                        add column contato_telefone_financeiro varchar,
-                        add column contato_email_comercial varchar,
-                        add column contato_email_financeiro varchar;
-
-
                     alter table gestao.tb_dados_opcionais
                         add column hora_criacao timestamp default now();
 
@@ -31,7 +19,7 @@ module.exports = {
                             id serial not null primary key,
                             hora_criacao timestamp default now(),
                             descricao varchar,
-                            arquivo_base clob,
+                            arquivo_base text,
                             tipo varchar,
                             tamanho integer
                         );
@@ -54,7 +42,7 @@ module.exports = {
                             tipo_contribuinte varchar
                         );
 
-                        create table gestao.tb_servicos_produtos
+                    create table gestao.tb_servicos_produtos
                         (
                             id serial not null primary key,
                             hora_criacao timestamp default now(),
@@ -66,6 +54,19 @@ module.exports = {
                             id_arquivo_fotos_empresa integer references gestao.tb_arquivo(id)
                         );
                     
+
+                    alter table gestao.tb_cliente_ou_fornecedor
+                            add column status varchar,
+                            add column endereco_gerado_estado varchar,
+                            add column endereco_gerado_pais varchar,
+                            add column contato_comercial varchar,
+                            add column contato_financeiro varchar,
+                            add column contato_telefone_comercial varchar,
+                            add column contato_telefone_financeiro varchar,
+                            add column contato_email_comercial varchar,
+                            add column contato_email_financeiro varchar,
+                            add column id_pagamento_dados_bancarios integer references gestao.tb_pagamento_dados_bancarios(id),
+                            add column id_servicos_produtos integer references gestao.tb_servicos_produtos(id);
                 `
         )
     }

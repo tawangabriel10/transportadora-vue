@@ -3,7 +3,6 @@ import Usuarios from '@/pages/Administracao/Usuarios/List'
 import Configuracoes from '@/pages/Administracao/Configuracoes/Configuracoes'
 import OrdemDeServico from '@/pages/Comercial/OrdemDeServico'
 import ManterOrdemDeServico from '@/pages/Comercial/ManterOrdemDeServico'
-import TesteComercial from '@/pages/Comercial/TesteComercial'
 import MapaDeViagem from '@/pages/Logistica/MapaDeViagem/MapaDeViagem'
 import AcertoDeViagem from '@/pages/Logistica/AcertoDeViagem/AcertoDeViagem'
 import CadastroDeClientes from '@/pages/Comercial/CadastroDeClientes/CadastroDeClientes'
@@ -17,6 +16,7 @@ const routes = [
     component: Home,
     meta: {
       title: 'Home',
+      active: true,
       hideFromMenu: true
     }
   },
@@ -36,7 +36,7 @@ const routes = [
         path: '/administracao/usuarios',
         component: Usuarios,
         meta: {
-          icon: 'mdi mdi-account-tie',
+          icon: 'mdi mdi-account-switch',
           title: 'Usuários',
           userPerfil: ['ADM']
         }
@@ -58,7 +58,7 @@ const routes = [
     component: Home,
     redirect: '/comercial/ordem-de-servicos',
     meta: {
-      icon: 'mdi mdi-clipboard-alert',
+      icon: 'mdi mdi-shopping',
       parent: true,
       title: 'Comercial',
       userPerfil: ['ADM']
@@ -68,7 +68,7 @@ const routes = [
         path: '/comercial/ordem-de-servicos',
         component: OrdemDeServico,
         meta: {
-          icon: 'mdi mdi-account-tie',
+          icon: 'mdi mdi-arrow-right-bold-circle',
           title: 'Ordem de Serviço',
           userPerfil: ['ADM']
         }
@@ -80,7 +80,7 @@ const routes = [
           return { id: route.params.id ? String(route.params.id) : void 0 }
         },
         meta: {
-          icon: 'mdi mdi-account-tie',
+          icon: 'mdi mdi-arrow-right-bold-circle-outline',
           title: 'Manter Ordem de Serviço',
           userPerfil: ['ADM'],
           //hideFromMenu: true
@@ -90,7 +90,7 @@ const routes = [
         path: '/comercial/cadastro-de-clientes',
         component: CadastroDeClientes,
         meta: {
-          icon: 'mdi mdi-account-tie',
+          icon: 'mdi mdi-account',
           title: 'Cadastro de Clientes',
           userPerfil: ['ADM']
         }
@@ -103,16 +103,6 @@ const routes = [
           title: 'Cadastro de Fornecedor',
           userPerfil: ['ADM']
         }
-      },
-      {
-        path: '/comercial/teste',
-        component: TesteComercial,
-        meta: {
-          icon: 'mdi mdi-account-tie',
-          hideFromMenu: true,
-          title: 'Teste Comercial',
-          userPerfil: ['ADM']
-        }
       }
     ]
   },
@@ -122,7 +112,7 @@ const routes = [
     component: Home,
     redirect: '/financeiro/gerar-fatura',
     meta: {
-      icon: 'mdi mdi-clipboard-alert',
+      icon: 'mdi mdi-cash-multiple',
       parent: true,
       title: 'Financeiro',
       userPerfil: ['ADM']
@@ -132,7 +122,7 @@ const routes = [
         path: '/financeiro/gerar-fatura',
         component: GerarFatura,
         meta: {
-          icon: 'mdi mdi-settings',
+          icon: 'mdi mdi-cash-usd',
           title: 'Gerar Fatura Final',
           userPerfil: ['ADM']
         }
@@ -145,7 +135,7 @@ const routes = [
     component: Home,
     redirect: '/logistica/mapa-de-viagem',
     meta: {
-      icon: 'mdi mdi-clipboard-alert',
+      icon: 'mdi mdi-car-estate',
       parent: true,
       title: 'Logística',
       userPerfil: ['ADM']
@@ -155,7 +145,7 @@ const routes = [
         path: '/logistica/mapa-de-viagem',
         component: MapaDeViagem,
         meta: {
-          icon: 'mdi mdi-settings',
+          icon: 'mdi mdi-google-maps',
           title: 'Mapa de Viagem',
           userPerfil: ['ADM']
         }
@@ -164,7 +154,7 @@ const routes = [
         path: '/logistica/acerto-de-viagem',
         component: AcertoDeViagem,
         meta: {
-          icon: 'mdi mdi-settings',
+          icon: 'mdi mdi-wallet-travel',
           title: 'Acerto de Viagem',
           userPerfil: ['ADM']
         }

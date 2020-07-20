@@ -29,35 +29,47 @@
           item-text="nome"
           item-value="id"
         />
-        <v-select
-          ref="menuSelect"
-          :items="homeRoutes"
-          label="Área"
-          item-text="meta.title"
-          item-value="name"
-          @change="changeRoute"
-          :value="currentRoute"
-          filled
-          dark
-          rounded
-          ></v-select>
-      </v-container>
-      <v-list class="menu-children" v-if="$route.matched.length && $route.matched[0].meta.parent">
-        <v-list-item
-          v-for="item in currentChildrenRoutes"
-          :key="item.meta.title"
-          :to="item.path"
-          link
-          >
-          <v-list-item-icon>
-            <v-icon :class="item.meta.icon"></v-icon>
-          </v-list-item-icon>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.meta.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+      </v-container>
+      <v-list class="menu-children">
+        <v-list-group
+          v-for="item in homeRoutes"
+          :key="item.meta.title"
+          v-model="item.meta.active"
+          dark
+          no-action
+          >
+          
+          <template v-slot:activator>
+            <v-list-item>
+
+              <v-list-item-icon>
+                <v-icon :class="item.meta.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="item.meta.title"></v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+
+          <v-list-item
+            v-for="itemChildren in item.children"
+            :key="itemChildren.meta.title"
+            :to="itemChildren.path"
+            link
+            >
+            <v-list-item-icon>
+              <v-icon :class="itemChildren.meta.icon"></v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ itemChildren.meta.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+        </v-list-group>
       </v-list>
+      
       <template v-slot:append>
         <v-divider></v-divider>
         <v-list>
@@ -148,11 +160,6 @@ export default {
         .then(() => {
           this.$router.push('/')
         })
-    },
-    changeRoute (name) {
-      if (this.$router.name !== name) {
-        this.$router.push({ name })
-      }
     },
     ...mapActions('Login', ['logoutAction']),
     ...mapActions('Crud', ['find', 'setCurrentEmpresa'])

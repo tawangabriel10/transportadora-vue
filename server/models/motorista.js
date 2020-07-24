@@ -236,6 +236,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    chapa: {
+      field: 'chapa',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     dataContratacao: {
       field: 'data_contratacao',
       type: DataTypes.DATEONLY,

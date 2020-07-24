@@ -5,37 +5,37 @@
           <v-row>
             <v-col>
               <custom-input
-                :header="{ type: 'number', text: 'Nº Ordem de Serviço', value: '' }"
+                :header="{ type: 'number', text: 'Nº Ordem de Serviço', value: 'numOrdemServico' }"
                 :edited-item="form"
               />
             </v-col>
             <v-col>
               <custom-input
-                :header="{ type: 'date', text: 'Data Emissão', value: 'dataEmissao' }"
+                :header="{ type: 'date', text: 'Data de emissão', value: 'dataEmissao' }"
+                :edited-item="form"
+              />
+            </v-col>
+            <v-col>
+              <custom-input
+                :header="{ type: 'time', text: 'Hora de emissão', value: 'horaEmissao' }"
+                :edited-item="form"
+              />
+            </v-col>
+            <v-col>
+              <custom-input
+                :header="{ type: 'date', text: 'Previsão da coleta', value: 'dataColeta' }"
+                :edited-item="form"
+              />
+            </v-col>
+            <v-col>
+              <custom-input
+                :header="{ type: 'date', text: 'Previsão da entrega', value: 'dataColeta' }"
                 :edited-item="form"
               />
             </v-col>
             <v-col>
               <custom-input
                 :header="{ type: 'text', text: 'Cód. IBGE', value: 'localEmissaoCodIbge' }"
-                :edited-item="form"
-              />
-            </v-col>
-            <v-col>
-              <custom-input
-                :header="{ type: 'date', text: 'Data de Coleta', value: 'dataColeta' }"
-                :edited-item="form"
-              />
-            </v-col>
-            <v-col>
-              <custom-input
-                :header="{ type: 'time', text: 'Hora Limite', value: 'horaLimite' }"
-                :edited-item="form"
-              />
-            </v-col>
-            <v-col>
-              <custom-input
-                :header="{ type: 'select', text: 'Status', value: '', items: todosStatus }"
                 :edited-item="form"
               />
             </v-col>
@@ -55,8 +55,24 @@
               />
             </v-col>
             <v-col>
+              <v-select
+                label="Status" 
+                :items="todosStatus"
+                v-model="form.status"
+              ></v-select>
+            </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col>
               <custom-input
-                :header="{ type: 'time', text: 'Hora Chamada', value: 'horaChamada' }"
+                :header="{ type: 'radio', text: 'Tipo de solicitante', value: 'tipoSolicitante', items: [{ id: 'PF', nome: 'Física' },{ id: 'PJ', nome: 'Jurídica' }] }"
+                :edited-item="form"
+              />
+            </v-col>
+            <v-col>
+              <custom-input
+                :header="{ type: 'text', text: 'CPF/CNPJ', value: 'cpfCnpjSolicitante' }"
                 :edited-item="form"
               />
             </v-col>
@@ -78,30 +94,55 @@
                   <v-col>
                       <custom-input
                           title="Código"
-                          v-bind="customInputs.dadosRemetenteProps"
+                          v-bind="customInputs.remetenteProps"
                           :edited-item="form"
                       />
                   </v-col>
                   <v-col>
                       <v-text-field disabled
                           label="Nome / Razão Social"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosRemetente && dynamicValues.dadosRemetente.nome" />
+                          :value="dynamicValues.remetente && dynamicValues.remetente.razaoSocial" />
                   </v-col>
               </v-row>
               <v-row>
                   <v-col>
                       <v-text-field disabled
                           label="Nome do Responsável"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosRemetente && dynamicValues.dadosRemetente.nome" />
+                          :value="dynamicValues.remetente && dynamicValues.remetente.nomeResponsavel" />
                   </v-col>
                   <v-col>
                       <v-text-field disabled
                           label="Contato do Responsável"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosRemetente && dynamicValues.dadosRemetente.nome" />
+                          :value="dynamicValues.remetente && dynamicValues.remetente.contatoResponsavel" />
                   </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Endereço"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.enderecoGeradoPeloCep" />
+                  </v-col>
+              </v-row>
+              <v-row>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Bairro"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.enderecoBairro" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Cidade"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.enderecoGeradoCidade" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="UF"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.enderecoGeradoUf" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Telefone"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.telefone" />
+                  </v-col>
+
               </v-row>
             </v-col>
           </v-row>
@@ -113,29 +154,54 @@
                   <v-col>
                       <custom-input
                           title="Código"
-                          v-bind="customInputs.dadosDestinatarioProps"
+                          v-bind="customInputs.destinatarioProps"
                           :edited-item="form"
                       />
                   </v-col>
                   <v-col>
                       <v-text-field disabled
                           label="Nome / Razão Social"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosDestinatario && dynamicValues.dadosDestinatario.nome" />
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.razaoSocial" />
                   </v-col>
               </v-row>
               <v-row>
                   <v-col>
                       <v-text-field disabled
                           label="Nome do Responsável"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosDestinatario && dynamicValues.dadosDestinatario.nome" />
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.nomeResponsavel" />
                   </v-col>
                   <v-col>
                       <v-text-field disabled
                           label="Contato do Responsável"
-                          v-if="form.idRemetente"
-                          :value="dynamicValues.dadosDestinatario && dynamicValues.dadosDestinatario.nome" />
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.contatoResponsavel" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Endereço"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.enderecoGeradoPeloCep" />
+                  </v-col>
+              </v-row>
+
+              <v-row>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Bairro"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.enderecoBairro" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Cidade"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.enderecoGeradoCidade" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="UF"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.enderecoGeradoUf" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Telefone"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.telefone" />
                   </v-col>
               </v-row>
             </v-col>
@@ -168,42 +234,36 @@
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Descrição"
-                                                  v-if="form.idVeiculoPrincipal"
-                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nome" />
+                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.descricao" />
                                           </v-col>
                                       </v-row>
                                       <v-row>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Placa"
-                                                  v-if="form.idVeiculoPrincipal"
                                                   :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.placa" />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Marca/Modelo"
-                                                  v-if="form.idVeiculoPrincipal"
                                                   :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.marcaModelo" />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Tipo do Veículo"
-                                                  v-if="form.idVeiculoPrincipal"
                                                   :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.tipoVeiculo && dynamicValues.veiculoPrincipal.tipoVeiculo.nome"
                                           />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Chassi"
-                                                  v-if="form.idVeiculoPrincipal"
                                                   :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
                                           />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="KM Saída"
-                                                  v-if="form.idVeiculoPrincipal"
-                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
+                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.kmSaida"
                                           />
                                           </v-col>
                                       </v-row>
@@ -211,22 +271,19 @@
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Horário de Saída"
-                                                  v-if="form.idVeiculoPrincipal"
-                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
+                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.horarioSaida"
                                           />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="Local"
-                                                  v-if="form.idVeiculoPrincipal"
-                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
+                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.local"
                                           />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled
                                                   label="UF"
-                                                  v-if="form.idVeiculoPrincipal"
-                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.nChassi"
+                                                  :value="dynamicValues.veiculoPrincipal && dynamicValues.veiculoPrincipal.enderecoUf"
                                           />
                                           </v-col>
                                       </v-row>
@@ -252,75 +309,65 @@
                     <v-col>
                         <custom-input
                             title="Código"
-                            v-bind="customInputs.dadosMotoristaProps"
+                            v-bind="customInputs.motoristaProps"
                             :edited-item="form"
                         />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="Nome"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.nome" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.nome" />
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                         <v-text-field disabled
                             label="CPF"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.cpf" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.cpf" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="RG"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.rg" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.rg" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="CNH"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.cnh" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.cnh" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="Contato do Motorista"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.telefone" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.telefone" />
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                         <v-text-field disabled
                             label="Endereço"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.enderecoGeradoPeloCep" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.enderecoGeradoPeloCep" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="Bairro"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.enderecoBairro" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.enderecoBairro" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="Cidade"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.enderecoGeradoCidade" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.enderecoGeradoCidade" />
                     </v-col>
                     <v-col>
                         <v-text-field disabled
                             label="UF"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.enderecoGeradoUf" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.enderecoGeradoUf" />
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                         <v-text-field disabled
                             label="Chapa"
-                            v-if="form.idMotorista"
-                            :value="dynamicValues.dadosMotorista && dynamicValues.dadosMotorista.nome" />
+                            :value="dynamicValues.motorista && dynamicValues.motorista.chapa" />
                     </v-col>
                 </v-row>
               </v-col>
@@ -332,31 +379,31 @@
                 <v-row>
                   <v-col>
                     <custom-input
-                      :header="{ type: 'text', text: 'Cadastrado por', value: '' }"
+                      :header="{ type: 'text', text: 'Cadastrado por', value: 'auditoria.nomeCadastro' }"
                       :edited-item="form"
                     />
                   </v-col>
                   <v-col>
                     <custom-input
-                      :header="{ type: 'date', text: 'Data', value: '' }"
+                      :header="{ type: 'date', text: 'Data', value: 'auditoria.dataCadastro' }"
                       :edited-item="form"
                     />
                   </v-col>
                   <v-col>
                     <custom-input
-                      :header="{ type: 'text', text: 'Alterado por', value: '' }"
+                      :header="{ type: 'text', text: 'Alterado por', value: 'auditoria.nomeAlterado' }"
                       :edited-item="form"
                     />
                   </v-col>
                   <v-col>
                     <custom-input
-                      :header="{ type: 'date', text: 'Data', value: '' }"
+                      :header="{ type: 'date', text: 'Data', value: 'auditoria.dataAlterado' }"
                       :edited-item="form"
                     />
                   </v-col>
                   <v-col>
                     <custom-input
-                      :header="{ type: 'text', text: 'Cód. Autenticação do E-mail', value: '' }"
+                      :header="{ type: 'text', text: 'Cód. Autenticação do E-mail', value: 'auditoria.codAutenticacaoEmail' }"
                       :edited-item="form"
                     />
                   </v-col>
@@ -443,22 +490,27 @@ export default {
       statusAtualDaOS: 'ABERTURA',
       todosStatus: ['A COLETAR', 'EM TRÂNSITO', 'ENTREGUE', 'DEPÓSITO'],
       dynamicValues: {
-        dadosRemetente: null,
-        dadosDestinatario: null,
+        remetente: null,
+        destinatario: null,
         veiculoPrincipal: null,
-        dadosMotorista: null
+        motorista: null
       },
       customInputs: {
-        dadosRemetenteProps: {
+        remetenteProps: {
           header: {
             type: 'grid-select-item-crud',
             text: 'Dados do Remetente',
-            value: 'idRemetente',
+            value: 'remetente',
             entity: 'clienteOuFornecedor',
             headers: [
-              { text: 'Nome / Razão Social', value: '' },
-              { text: 'Nome do Responsável', value: '' },
-              { text: 'Contato do Responsável', value: '' }
+              { text: 'Nome / Razão Social', value: 'razaoSocial' },
+              { text: 'Nome do Responsável', value: 'nomeResponsavel' },
+              { text: 'Contato do Responsável', value: 'contatoResponsavel' },
+              { text: 'Endereço', value: 'enderecoGeradoPeloCep' },
+              { text: 'Bairro', value: 'enderecoBairro' },
+              { text: 'Cidade', value: 'enderecoGeradoCidade' },
+              { text: 'UF', value: 'enderecoGeradoUf' },
+              { text: 'Telefone', value: 'telefone' }
             ],
             onSelectRow: async (item) => {
               await this.buildVeiculoPrincipal(item.id)
@@ -468,16 +520,21 @@ export default {
             }
           }
         },
-        dadosDestinatarioProps: {
+        destinatarioProps: {
           header: {
             type: 'grid-select-item-crud',
             text: 'Dados do Destinátario',
-            value: 'idDestinatario',
+            value: 'destinatario',
             entity: 'clienteOuFornecedor',
             headers: [
-              { text: 'Nome / Razão Social', value: 'nome' },
-              { text: 'Nome do Responsável', value: 'nomeContato' },
-              { text: 'Contato do Responsável', value: 'telefone' }
+              { text: 'Nome / Razão Social', value: 'razaoSocial' },
+              { text: 'Nome do Responsável', value: 'nomeResponsavel' },
+              { text: 'Contato do Responsável', value: 'contatoResponsavel' },
+              { text: 'Endereço', value: 'enderecoGeradoPeloCep' },
+              { text: 'Bairro', value: 'enderecoBairro' },
+              { text: 'Cidade', value: 'enderecoGeradoCidade' },
+              { text: 'UF', value: 'enderecoGeradoUf' },
+              { text: 'Telefone', value: 'telefone' }
             ],
             onSelectRow: async (item) => {
               await this.buildVeiculoPrincipal(item.id)
@@ -491,18 +548,18 @@ export default {
           header: {
             type: 'grid-select-item-crud',
             text: 'Veículo Principal',
-            value: 'idVeiculoPrincipal',
+            value: 'veiculoPrincipal',
             entity: 'veiculos',
             headers: [
-              { text: 'Descrição', value: '' },
+              { text: 'Descrição', value: 'descricao' },
               { text: 'Placa', value: 'placa' },
               { text: 'Marca/Modelo', value: 'marcaModelo' },
               { text: 'Tipo do Veículo', value: 'idTipoVeiculo' },
               { text: 'Chassi', value: 'nChassi' },
-              { text: 'KM Saída', value: '' },
-              { text: 'Horário de Saída', value: '' },
-              { text: 'Local', value: '' },
-              { text: 'UF', value: '' }
+              { text: 'KM Saída', value: 'kmSaida' },
+              { text: 'Horário de Saída', value: 'horarioSaida' },
+              { text: 'Local', value: 'local' },
+              { text: 'UF', value: 'enderecoUf' }
             ],
             onSelectRow: async (item) => {
               await this.buildVeiculoPrincipal(item.id)
@@ -512,11 +569,11 @@ export default {
             }
           }
         },
-        dadosMotoristaProps: {
+        motoristaProps: {
           header: {
             type: 'grid-select-item-crud',
             text: 'Dados do Motorista',
-            value: 'idMotorista',
+            value: 'motorista',
             entity: 'motorista',
             headers: [
               { text: 'Nome', value: 'nome' },
@@ -528,7 +585,7 @@ export default {
               { text: 'Bairro', value: 'enderecoBairro' },
               { text: 'Cidade', value: 'enderecoGeradoCidade' },
               { text: 'UF', value: 'enderecoGeradoUf' },
-              { text: 'Chapa', value: '' }
+              { text: 'Chapa', value: 'chapa' }
             ],
             onSelectRow: async (item) => {
               await this.buildVeiculoPrincipal(item.id)
@@ -542,12 +599,12 @@ export default {
     }
   },
   watch: {
-    'dynamicValues.dadosRemetente' (codigo) {
+    'dynamicValues.remetente' (codigo) {
       this.buildClientePessoaCustomInput(codigo)
     },
-    'dynamicValues.tipoClienteDestinatario' (tipoCliente) {
+    'dynamicValues.destinatario' (codigo) {
       this.buildClientePessoaCustomInput(
-        tipoCliente,
+        codigo,
         'idDestinatario',
         'Código do Destinatário',
         'destinatario',
@@ -567,11 +624,6 @@ export default {
     statusNumber () {
       const status = this.todosStatus
       return status.indexOf(this.statusAtualDaOS)
-    }
-  },
-  async mounted () {
-    if (this.id) {
-      await this.getCurrentOs(this.id)
     }
   },
   methods: {
@@ -604,55 +656,6 @@ export default {
         }
       }
     },
-    async getCurrentOs (id) {
-      this.currentOs = (await this.find({
-        entity: 'ordemServico',
-        params: {
-          where: {
-            id
-          },
-          include: [
-            { model: 'ClienteOuFornecedor', as: 'destinatario' },
-            { model: 'ClienteOuFornecedor', as: 'remetente' },
-            { model: 'ClienteOuFornecedor', as: 'consignatario' },
-            { model: 'Motorista', as: 'motorista' },
-            { model: 'Veiculos', as: 'veiculoPrincipal' }
-          ]
-        }
-      }))[0] || {}
-      this.form = {
-        ...this.form,
-        ...this.currentOs
-      }
-      if (this.currentOs && this.currentOs.destinatario) {
-        this.dynamicValues.tipoClienteDestinatario = this.currentOs.destinatario.tipoCliente
-      }
-      if (this.currentOs && this.currentOs.remetente) {
-        this.dynamicValues.tipoClienteRemetente = this.currentOs.remetente.tipoCliente
-      }
-      if (this.currentOs.idVeiculoPrincipal) {
-        await this.buildVeiculoPrincipal(this.currentOs.idVeiculoPrincipal)
-      }
-    },
-    async salvar () {
-      if (this.id) {
-        await this.updateRow({
-          updateState: false,
-          entity: 'ordemServico',
-          key: this.id,
-          values: this.form
-        })
-        await this.getCurrentOs(this.id)
-      } else {
-        const os = await this.insertRow({
-          updateState: false,
-          entity: 'ordemServico',
-          values: this.form
-        })
-        await this.$router.push({ path: `/comercial/ordem-de-servico/${os.id}` })
-        this.getCurrentOs(os.id)
-      }
-    },
     buildClientePessoaCustomInput (tipoCliente, key = 'idRemetente', labelInput = 'Código do Remetente', dynamicAttribute = 'remetente', customInputName = 'remetenteProps') {
       const getItemData = async (item) => {
         this.form[key] = item.id
@@ -672,7 +675,6 @@ export default {
           }
         }
       }
-
       this.customInputs[customInputName] = {
         header: {
           type: 'grid-select-item-crud',

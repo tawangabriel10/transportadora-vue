@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: sequelize.fn('now')
     },
+    numOrdemServico: {
+      field: 'numero_ordem_servico',
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
     idMapaViagem: {
       field: 'id_mapa_viagem',
       type: DataTypes.INTEGER,
@@ -38,6 +43,26 @@ module.exports = (sequelize, DataTypes) => {
     },
     localEmissaoDesc: {
       field: 'local_emissao_desc',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    dataEmissao: {
+      field: 'data_emissao',
+      type: DataTypes.DATEONLY,
+      get () {
+        const value = this.getDataValue('dataEmissao')
+        return value ? moment(value, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
+      },
+      set (value) {
+        if (value) {
+          value = moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD')
+          this.setDataValue('dataEmissao', value)
+        }
+      },
+      allowNull: true
+    },
+    horaEmissao: {
+      field: 'hora_emissao',
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -54,6 +79,11 @@ module.exports = (sequelize, DataTypes) => {
           this.setDataValue('dataColeta', value)
         }
       },
+      allowNull: true
+    },
+    status: {
+      field: 'status',
+      type: DataTypes.STRING,
       allowNull: true
     },
     horaLimite: {
@@ -73,6 +103,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     horaChamada: {
       field: 'hora_chamada',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    tipoSolicitante: {
+      field: 'tipo_solicitante',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    cpfCnpjSolicitante: {
+      field: 'cpf_cnpj_solicitante',
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -130,6 +170,11 @@ module.exports = (sequelize, DataTypes) => {
       field: 'id_dados_opcionais',
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    idAuditoria: {
+      field: 'id_auditoria',
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     tableName: 'tb_ordem_servico',
@@ -178,6 +223,12 @@ module.exports = (sequelize, DataTypes) => {
       dadosOpcionais: {
         from: 'id_dados_opcionais',
         to: 'DadosOpcionais',
+        toColumn: 'id',
+        type: ASSOCIATION_TYPE.ONE_TO_ONE
+      },
+      auditoria: {
+        from: 'id_auditoria',
+        to: 'Auditoria',
         toColumn: 'id',
         type: ASSOCIATION_TYPE.ONE_TO_ONE
       }

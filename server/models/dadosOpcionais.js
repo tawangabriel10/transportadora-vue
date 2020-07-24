@@ -46,54 +46,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true
       },
-      valorFrete: {
-        field: 'valor_frete',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      pedagio: {
-        field: 'pedagio',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      adValoragem: {
-        field: 'ad_valoragem',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      seguro: {
-        field: 'seguro',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      outros: {
-        field: 'outros',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      taxaAerea: {
-        field: 'taxa_aerea',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      taxaColeta: {
-        field: 'taxa_coleta',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      taxaPrestacao: {
-        field: 'taxa_prestacao',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      taxaEntrega: {
-        field: 'taxa_entrega',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      valorRedespacho: {
-        field: 'valor_redespacho',
-        type: DataTypes.DOUBLE,
+      idFrete: {
+        field: 'id_frete',
+        type: DataTypes.INTEGER,
         allowNull: true
       },
       dataChegada: {
@@ -238,6 +193,12 @@ module.exports = (sequelize, DataTypes) => {
             redespacho: {
                 from: 'id_redespacho',
                 to: 'ClienteOuFornecedor',
+                toColumn: 'id',
+                type: ASSOCIATION_TYPE.MANY_TO_ONE
+            },
+            frete: {
+                from: 'id_frete',
+                to: 'Frete',
                 toColumn: 'id',
                 type: ASSOCIATION_TYPE.MANY_TO_ONE
             }

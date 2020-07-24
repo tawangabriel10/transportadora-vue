@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    descricao: {
+      field: 'descricao',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     placa: {
       field: 'placa',
       type: DataTypes.STRING,
@@ -108,6 +113,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     enderecoUf: {
       field: 'endereco_uf',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    kmSaida: {
+      field: 'km_saida',
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    horarioSaida: {
+      field: 'horario_saida',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    local: {
+      field: 'local',
       type: DataTypes.STRING,
       allowNull: true
     },

@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
 })
   
   AuditoriaModel.appDefinitions = {
-    autoCrud: false,
+    autoCrud: true,
     associations: {
   
     }

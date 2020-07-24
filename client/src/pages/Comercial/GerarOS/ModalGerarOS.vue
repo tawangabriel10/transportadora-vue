@@ -8,22 +8,22 @@
                 </v-card-title>
                 <v-card-text>
                     <v-tabs v-model="currentTab">
-                        <v-tab
+                        <v-tab class="disabledTab"
                         href="#tab-ordem-de-coleta"
                             >1. Ordem de Coleta
                         </v-tab>
 
-                        <v-tab
+                        <v-tab class="disabledTab"
                         href="#tab-mercadorias"
                             >2. Mercadorias
                         </v-tab>
 
-                        <v-tab
+                        <v-tab class="disabledTab"
                         href="#tab-dados-opcionais"
                             >3. Dados Opcionais
                         </v-tab>
 
-                        <v-tab
+                        <v-tab class="disabledTab"
                         href="#tab-ocorrencias"
                             >4. Ocorrências
                         </v-tab>
@@ -40,16 +40,17 @@
                             <dados-opcionais :form="form.dadosOpcionais"></dados-opcionais>
                         </v-tab-item>
 
-                        <v-tab-item value="tab-ocorrencias">
+                        <!-- <v-tab-item value="tab-ocorrencias">
                             <ocorrencias :form="form.ocorrencias"></ocorrencias>
-                        </v-tab-item>
+                        </v-tab-item> -->
                     </v-tabs>
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn @click="showDialog = false">Cancelar</v-btn>
                     <v-btn color="blue" :disabled="currentTab === 'tab-ordem-de-coleta'" @click="onVoltarDados">Voltar</v-btn>
-                    <v-btn color="blue" :disabled="currentTab === 'tab-ocorrencias'" @click="onAvancarDados">Avançar</v-btn>
+                    <v-btn color="blue" :disabled="currentTab === 'tab-dados-opcionais'" @click="onAvancarDados">Avançar</v-btn>
+                    <v-btn color="blue" v-if="currentTab === 'tab-dados-opcionais'" @click="salvar">Salvar</v-btn>
                 </v-card-actions>
             </v-card>
 
@@ -58,6 +59,12 @@
 </template>
 
 <style lang="scss" src="@/pages/Comercial/Comercial.scss"></style>
+
+<style scoped>
+    .disabledTab{
+      pointer-events: none;
+  }
+</style>
 
 <script>
 import OrdemDeColeta from '@/pages/Comercial/GerarOS/OrdemDeColeta'
@@ -83,11 +90,16 @@ export default {
         showDialog: {
             type: Boolean,
             required: false
+        },
+        id: {
+            type: String,
+            required: false
         }
     },
     data() {
         return {
             form: {
+                id: null,
                 ordemDeColeta: {},
                 mercadorias: {},
                 dadosOpcionais: {},
@@ -96,12 +108,18 @@ export default {
             currentTab: TAB_ORDEM_DE_COLETA
         }
     },
+    async mounted () {
+        if (this.id) {
+        await this.getCurrentOs(this.id)
+        }
+    },
     methods: {
-        ...mapActions('OrdemDeServico', ['loginAction']),
+        ...mapActions('Crud', ['find', 'updateRow', 'insertRow']),
         onVoltarDados() {
-            if (this.currentTab === TAB_OCORRENCIAS) {
+            /*if (this.currentTab === TAB_OCORRENCIAS) {
                 this.currentTab = TAB_DADOS_OPCIONAIS
-            } else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
+            } else */
+            if (this.currentTab === TAB_DADOS_OPCIONAIS) {
                 this.currentTab = TAB_MERCADORIAS
             } else if (this.currentTab === TAB_MERCADORIAS) {
                 this.currentTab = TAB_ORDEM_DE_COLETA
@@ -113,10 +131,57 @@ export default {
                 this.currentTab = TAB_MERCADORIAS
             } else if (this.currentTab === TAB_MERCADORIAS) {
                 this.currentTab = TAB_DADOS_OPCIONAIS
-            } else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
+            }/* else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
                 this.currentTab = TAB_OCORRENCIAS
-            }
+            }*/
             console.log('Tab Atual: ', this.currentTab)
+        },
+        async getCurrentOs (id) {
+            this.currentOs = (await this.find({
+                entity: 'ordemServico',
+                params: {
+                where: {
+                    id
+                },
+                include: [
+                    { model: 'ClienteOuFornecedor', as: 'destinatario' },
+                    { model: 'ClienteOuFornecedor', as: 'remetente' },
+                    { model: 'ClienteOuFornecedor', as: 'consignatario' },
+                    { model: 'Motorista', as: 'motorista' },
+                    { model: 'Veiculos', as: 'veiculoPrincipal' },
+                    { model: 'Auditoria', as: 'auditoria'}
+                ]
+                }
+            }))[0] || {}
+            console.log('CURRENT OS', this.currentOs)
+            this.form = {
+                ...this.form,
+                ...this.currentOs
+            }
+        },
+        async salvar () {
+            let entity = {
+                ...this.form.ordemDeColeta,
+                ...this.form.mercadorias
+            }
+            if (this.id) {
+                    await this.updateRow({
+                        updateState: false,
+                        entity: 'ordemServico',
+                        key: this.id,
+                        values: this.form
+                    })
+                    await this.getCurrentOs(this.id)
+            } else {
+                console.log()
+                const os = await this.insertRow({
+                    updateState: false,
+                    entity: 'ordemServico',
+                    values: this.form
+                })
+                await this.$router.push({ path: `/comercial/ordem-de-servicos` })
+                this.getCurrentOs(os.id)
+            }
         }
     }
 }

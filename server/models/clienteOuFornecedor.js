@@ -186,6 +186,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
+    nomeResponsavel: {
+      field: 'nome_responsavel',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    contatoResponsavel: {
+      field: 'contato_responsavel',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     cnpj: {
       field: 'cnpj',
       type: DataTypes.STRING,

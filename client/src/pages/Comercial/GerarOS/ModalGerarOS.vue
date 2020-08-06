@@ -2,7 +2,7 @@
     <div class="manter-os">
 
         <v-dialog v-model="showDialog" persistent max-width="1000px">
-            <v-card flat title>
+            <v-card flat tile>
                 <v-card-title>
                     <span class="headline">Gerar nova OS</span>
                 </v-card-title>

@@ -229,7 +229,7 @@
                                                   title="Código"
                                                   v-bind="customInputs.veiculoPrincipalProps"
                                                   :edited-item="form"
-                                          />
+                                              />
                                           </v-col>
                                           <v-col>
                                               <v-text-field disabled

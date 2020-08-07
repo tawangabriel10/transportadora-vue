@@ -305,13 +305,13 @@ module.exports = (sequelize, DataTypes) => {
       },
       consignatarioOrdemServicos: {
         from: 'id',
-        to: 'OrdemServico',
+        to: 'DadosOpcionais',
         toColumn: 'id_consignatario',
         type: ASSOCIATION_TYPE.ONE_TO_MANY
       },
       redespachoOrdemServicos: {
         from: 'id',
-        to: 'OrdemServico',
+        to: 'DadosOpcionais',
         toColumn: 'id_redespacho',
         type: ASSOCIATION_TYPE.ONE_TO_MANY
       },

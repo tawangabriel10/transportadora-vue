@@ -7,7 +7,7 @@ class OrdemServicoAction extends ControllerBase {
         try {
             const { dataEmissao, codigoIbge, dataColeta, horaLimite, status, localColeta, localEntrega, nomeSolicitante, codigoRemetente } = utils.getRequestValues(this.request)
             const ordensServicos = await OrdemServico.findAll({
-                where: { horaCriacao: dataEmissao },
+                where: {},
                 attributes: [ 'id', 'horaCriacao', 'localEmissaoCodIbge', 'localEmissaoDesc', 'dataColeta' ]
             })
 

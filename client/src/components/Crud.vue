@@ -143,10 +143,6 @@ export default {
       type: Function,
       required: false
     },
-    onClickDeleteRow: {
-      type: Function,
-      required: false
-    },
     kpiSumField: {
       type: Object,
       default: () => null
@@ -308,11 +304,7 @@ export default {
     },
 
     async deleteItem (item) {
-      if (this.$props.onClickDeleteRow) {
-        this.$props.onClickDeleteRow(item)
-      } else {
-        this.$refs.crudBase.delete(item)
-      }
+      this.$refs.crudBase.delete(item)
     }
 
   }

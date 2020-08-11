@@ -3,8 +3,9 @@ const { appDefinitions: mixinAppDefinitions } = imp('./_base/mixin-app-definitio
 const moment = require('moment')
 
 module.exports = (sequelize, DataTypes) => {
-  const MapaViagemModel = sequelize.define('MapaViagem', {
+  const SolicitanteModel = sequelize.define('Solicitante', {
     id: {
+      field: 'id',
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -26,17 +27,16 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: sequelize.fn('now')
     },
-    status: {
-      field: 'status',
+    nome: {
+      field: 'nome',
       type: DataTypes.STRING,
       allowNull: true
     }
   }, {
-    tableName: 'tb_mapa_viagem',
+    tableName: 'tb_solicitante',
     timestamps: false
   })
-
-  MapaViagemModel.appDefinitions = {
+  SolicitanteModel.appDefinitions = {
     ...mixinAppDefinitions,
     autoCrud: true,
     associations: {
@@ -44,5 +44,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  return MapaViagemModel
+  return SolicitanteModel
 }

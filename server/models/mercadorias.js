@@ -26,11 +26,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: sequelize.fn('now')
     },
-    quantidade: {
-      field: 'quantidade',
-      type: DataTypes.DOUBLE,
-      allowNull: true
-    },
     unidade: {
       field: 'unidade',
       type: DataTypes.STRING,
@@ -76,11 +71,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DOUBLE,
       allowNull: true
     },
-    idNaturezaCarga: {
-      field: 'id_natureza_carga',
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     especieVolumeCategoria: {
       field: 'especie_volume_categoria',
       type: DataTypes.STRING,
@@ -119,12 +109,6 @@ module.exports = (sequelize, DataTypes) => {
   MercadoriasModel.appDefinitions = {
     autoCrud: true,
     associations: {
-      naturezaCarga: {
-        from: 'id_natureza_carga',
-        to: 'NaturezaCarga',
-        toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
-      },
       ordemServico: {
         from: 'id_ordem_servico',
         to: 'OrdemServico',

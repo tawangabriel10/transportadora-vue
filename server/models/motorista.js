@@ -329,12 +329,6 @@ module.exports = (sequelize, DataTypes) => {
         to: 'Veiculos',
         toColumn: 'id_motorista',
         type: ASSOCIATION_TYPE.ONE_TO_MANY
-      },
-      ordemServicos: {
-        from: 'id',
-        to: 'OrdemServico',
-        toColumn: 'id_motorista',
-        type: ASSOCIATION_TYPE.ONE_TO_MANY
       }
     }
   }

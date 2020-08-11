@@ -122,7 +122,6 @@ export default {
       } else if (this.currentTab === TAB_MERCADORIAS) {
         this.currentTab = TAB_ORDEM_DE_COLETA;
       }
-      console.log("Tab Atual: ", this.currentTab);
     },
     onAvancarDados() {
       if (this.currentTab === TAB_ORDEM_DE_COLETA) {
@@ -132,7 +131,6 @@ export default {
       } /* else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
                 this.currentTab = TAB_OCORRENCIAS
             }*/
-      console.log("Tab Atual: ", this.currentTab);
     },
     onShowOcorrencias() {
         this.currentTab = TAB_OCORRENCIAS;
@@ -149,7 +147,9 @@ export default {
               include: [
                 { model: "ClienteOuFornecedor", as: "destinatario" },
                 { model: "ClienteOuFornecedor", as: "remetente" },
-                { model: "Auditoria", as: "auditoria" },
+                { model: "Solicitante", as: "solicitante" },
+                { model: "Mercadorias", as: "mercadorias" },
+                { model: "DadosOpcionais", as: "dadosOpcionais" },
               ],
             },
           })
@@ -179,9 +179,10 @@ export default {
         const os = await this.insertRow({
           updateState: false,
           entity: "ordemServico",
-          values: tentity,
+          values: entity,
         });
-        await this.$router.push({ path: `/comercial/ordem-de-servicos` });
+      //  await this.$router.push({ path: `/comercial/ordem-de-servicos` });
+        this.showDialog = false;
         this.getCurrentOs(os.id);
       }
     },

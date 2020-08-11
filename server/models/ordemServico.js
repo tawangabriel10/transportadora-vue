@@ -31,11 +31,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    idMapaViagem: {
-      field: 'id_mapa_viagem',
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     localEmissaoCodIbge: {
       field: 'local_emissao_cod_ibge',
       type: DataTypes.DOUBLE,
@@ -141,11 +136,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true
     },
-    idVeiculoPrincipal: {
-      field: 'id_veiculo_principal',
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
     kmSaida: {
       field: 'km_saida',
       type: DataTypes.DOUBLE,
@@ -154,11 +144,6 @@ module.exports = (sequelize, DataTypes) => {
     horarioSaida: {
       field: 'horario_saida',
       type: DataTypes.STRING,
-      allowNull: true
-    },
-    idMotorista: {
-      field: 'id_motorista',
-      type: DataTypes.INTEGER,
       allowNull: true
     },
     chapa: {
@@ -171,8 +156,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: true
     },
-    idAuditoria: {
-      field: 'id_auditoria',
+    idSolicitante: {
+      field: 'id_solicitante',
       type: DataTypes.INTEGER,
       allowNull: true
     }
@@ -190,12 +175,6 @@ module.exports = (sequelize, DataTypes) => {
         toColumn: 'id_ordem_servico',
         type: ASSOCIATION_TYPE.ONE_TO_MANY
       },
-      mapaViagem: {
-        from: 'id_mapa_viagem',
-        to: 'MapaViagem',
-        toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
-      },
       remetente: {
         from: 'id_remetente',
         to: 'ClienteOuFornecedor',
@@ -208,27 +187,15 @@ module.exports = (sequelize, DataTypes) => {
         toColumn: 'id',
         type: ASSOCIATION_TYPE.MANY_TO_ONE
       },
-      veiculoPrincipal: {
-        from: 'id_veiculo_principal',
-        to: 'Veiculos',
-        toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
-      },
-      motorista: {
-        from: 'id_motorista',
-        to: 'Motorista',
-        toColumn: 'id',
-        type: ASSOCIATION_TYPE.MANY_TO_ONE
-      },
       dadosOpcionais: {
         from: 'id_dados_opcionais',
         to: 'DadosOpcionais',
         toColumn: 'id',
         type: ASSOCIATION_TYPE.ONE_TO_ONE
       },
-      auditoria: {
-        from: 'id_auditoria',
-        to: 'Auditoria',
+      solicitante: {
+        from: 'id_solicitante',
+        to: 'Solicitante',
         toColumn: 'id',
         type: ASSOCIATION_TYPE.ONE_TO_ONE
       }

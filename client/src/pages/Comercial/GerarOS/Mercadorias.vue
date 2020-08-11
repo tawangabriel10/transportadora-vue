@@ -8,12 +8,6 @@
             <v-row>
               <v-col>
                 <custom-input
-                  :header="{ type: 'text', text: 'Quantidade', value: 'quantidade' }"
-                  :edited-item="formMercadoria"
-                />
-              </v-col>
-              <v-col>
-                <custom-input
                   :header="{ type: 'text', text: 'Unidade', value: 'unidade' }"
                   :edited-item="formMercadoria"
                 />
@@ -62,15 +56,9 @@
             <v-row>
               <v-col>
                 <custom-input
-                  title="Natureza da Carga"
-                  v-bind="customInputs.naturezaCargaProps"
+                  :header="{ type: 'text', text: 'Espécie do Volume ou Mercadoria', value: 'especieVolumeCategoria' }"
                   :edited-item="formMercadoria"
-                />
-              </v-col>
-              <v-col>
-                <v-text-field disabled
-                    label="Espécie do Volume ou Mercadoria"
-                    :value="dynamicValues.naturezaCarga && dynamicValues.naturezaCarga.especie" />
+                  />
               </v-col>
             </v-row>
 
@@ -154,49 +142,16 @@ export default {
           options: { disabled: true },
           hideOnAdd: true,
         },
-        { text: "Quantidade", value: "quantidade" },
         { text: "Unidade", value: "unidade" },
-        { text: "Natureza", value: "idNaturezaCarga", lookup: "natureza" },
         { text: "Espécie", value: "especie" },
         { text: "Produto Transportado", value: "produtoTransportado" },
         { text: "Nº Nota Fiscal", value: "nNotaFiscal" },
         { text: "Data", value: "dataEmissao" },
         { text: "Ações", value: "action", sortable: false },
       ],
-      dynamicValues: {
-        naturezaCarga: null,
-      },
-      customInputs: {
-        naturezaCargaProps: {
-          header: {
-            type: "grid-select-item-crud",
-            text: "Dados da Natureza Carga",
-            value: "idNaturezaCarga",
-            entity: "naturezaCarga",
-            headers: [
-              { text: "Nome", value: "nome" },
-              { text: "Espécie", value: "especie" },
-              { text: "Código Externo", value: "codigoExterno" },
-              { text: "Código Harmonizado", value: "codigoHarmonizado" },
-              {
-                text: "Valor Diário da Armazenagem",
-                value: "valorDiarioArmazenagem",
-                type: "currency",
-              },
-            ],
-            onSelectRow: async (item) => {
-              await this.buildNaturezaCarga(item.id);
-            },
-            onSave: async (item) => {
-              await this.buildNaturezaCarga(item.id);
-            },
-          },
-        },
-      },
     };
   },
   methods: {
-    ...mapActions('Crud', ['find', 'updateRow', 'insertRow']),
     onSave() {
       this.form.push({
         ...this.formMercadoria,
@@ -211,49 +166,7 @@ export default {
         ...item,
       };
     },
-    onDeleteItem(item, index) {},
-    buildNaturezaCarga(id, key = 'idNaturezaCarga', labelInput = 'Natureza da Carga', dynamicAttribute = 'naturezaCarga', customInputName = 'naturezaCargaProps') {
-      const getItemData = async (item) => {
-        this.form[key] = item.id
-        const data = (await this.find({
-          updateState: false,
-          entity: 'naturezaCarga',
-          params: {
-            where: {
-              id: item.id
-            }
-          }
-        }))[0]
-        console.log('DADOS', data)
-        if (data) {
-          this.dynamicValues = {
-            ...this.dynamicValues,
-            [dynamicAttribute]: data
-          }
-        }
-      }
-      this.customInputs[customInputName] = {
-        header: {
-          type: 'grid-select-item-crud',
-          text: labelInput,
-          value: key,
-          entity: 'naturezaCarga',
-          where: {
-            id
-          },
-          headers: this.customInputs[customInputName].header.headers,
-          preSave: (itemAdicionado) => {
-            itemAdicionado.id = id
-          },
-          onSelectRow: async (item) => {
-            getItemData(item)
-          },
-          onSave: async (item) => {
-            getItemData(item)
-          }
-        }
-      }
-    },
+    onDeleteItem(item, index) {}
   },
 };
 </script>

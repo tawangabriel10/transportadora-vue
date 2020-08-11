@@ -66,13 +66,13 @@
           <v-row>
             <v-col>
               <custom-input
-                :header="{ type: 'radio', text: 'Tipo de solicitante', value: 'tipoSolicitante', items: [{ id: 'PF', nome: 'Física' },{ id: 'PJ', nome: 'Jurídica' }] }"
+                :header="{ type: 'radio', text: 'Tipo de solicitante', value: 'tipoSolicitante', items: [{ id: 'PF', nome: 'Física' },{ id: 'PJ', nome: 'Jurídica' }], required: true }"
                 :edited-item="form"
               />
             </v-col>
             <v-col>
               <custom-input
-                :header="{ type: 'text', text: 'CPF/CNPJ', value: 'cpfCnpjSolicitante', mask: (form.tipoSolicitante === 'PJ' ? '##.###.###/####-##' : '###.###.###-##') }"
+                :header="{ type: 'text', text: 'CPF/CNPJ', value: 'cpfCnpjSolicitante', mask: (form.tipoSolicitante === 'PJ' ? '##.###.###/####-##' : '###.###.###-##'), required: true }"
                 :edited-item="form"
               />
             </v-col>
@@ -80,10 +80,11 @@
 
           <v-row>
             <v-col>
-              <custom-input
-                :header="{ type: 'text', text: 'Nome do Solicitante', value: 'nomeSolicitante' }"
-                :edited-item="form"
-              />
+                <custom-input
+                    title="Nome do Solicitante"
+                    v-bind="customInputs.solicitanteProps"
+                    :edited-item="form"
+                />
             </v-col>
           </v-row>
 
@@ -102,6 +103,11 @@
                       <v-text-field disabled
                           label="Nome / Razão Social"
                           :value="dynamicValues.remetente && dynamicValues.remetente.razaoSocial" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Data de Nascimento"
+                          :value="dynamicValues.remetente && dynamicValues.remetente.dataNascimento" />
                   </v-col>
               </v-row>
               <v-row>
@@ -162,6 +168,11 @@
                       <v-text-field disabled
                           label="Nome / Razão Social"
                           :value="dynamicValues.destinatario && dynamicValues.destinatario.razaoSocial" />
+                  </v-col>
+                  <v-col>
+                      <v-text-field disabled
+                          label="Data de Nascimento"
+                          :value="dynamicValues.destinatario && dynamicValues.destinatario.dataNascimento" />
                   </v-col>
               </v-row>
               <v-row>
@@ -234,12 +245,30 @@ export default {
       statusAtualDaOS: 'ABERTURA',
       todosStatus: ['A COLETAR', 'EM TRÂNSITO', 'ENTREGUE', 'DEPÓSITO'],
       dynamicValues: {
+        solicitante: null,
         remetente: null,
         destinatario: null,
         veiculoPrincipal: null,
         motorista: null
       },
       customInputs: {
+        solicitanteProps: {
+          header: {
+            type: 'grid-select-item-crud',
+            text: 'Dados do Solicitante',
+            value: 'solicitante',
+            entity: 'solicitante',
+            headers: [
+              { text: 'Nome do Solicitante', value: 'nome' }
+            ],
+            onSelectRow: async (item) => {
+              await this.buildSolicitanteCustomInput(item.id)
+            },
+            onSave: async (item) => {
+              await this.buildSolicitanteCustomInput(item.id)
+            }
+          }
+        },
         remetenteProps: {
           header: {
             type: 'grid-select-item-crud',
@@ -247,14 +276,15 @@ export default {
             value: 'remetente',
             entity: 'clienteOuFornecedor',
             headers: [
-              { text: 'Nome / Razão Social', value: 'razaoSocial' },
-              { text: 'Nome do Responsável', value: 'nomeResponsavel' },
+              { text: 'Nome / Razão Social', value: 'razaoSocial', required: true },
+              { text: 'Data de Nascimento', value: 'dataNascimento', type: 'date' },
+              { text: 'Nome do Responsável', value: 'nomeResponsavel', required: true },
               { text: 'Contato do Responsável', value: 'contatoResponsavel' },
-              { text: 'Endereço', value: 'enderecoGeradoPeloCep' },
+              { text: 'Endereço', value: 'enderecoGeradoPeloCep', required: true },
               { text: 'Bairro', value: 'enderecoBairro' },
-              { text: 'Cidade', value: 'enderecoGeradoCidade' },
+              { text: 'Cidade', value: 'enderecoGeradoCidade', required: true },
               { text: 'UF', value: 'enderecoGeradoUf' },
-              { text: 'Telefone', value: 'telefone' }
+              { text: 'Telefone', value: 'telefone', mask: '(##) #####-####' }
             ],
             onSelectRow: async (item) => {
               await this.buildClientePessoaCustomInput(item.id)
@@ -271,14 +301,15 @@ export default {
             value: 'destinatario',
             entity: 'clienteOuFornecedor',
             headers: [
-              { text: 'Nome / Razão Social', value: 'razaoSocial' },
-              { text: 'Nome do Responsável', value: 'nomeResponsavel' },
+              { text: 'Nome / Razão Social', value: 'razaoSocial', required: true },
+              { text: 'Data de Nascimento', value: 'dataNascimento', type: 'date' },
+              { text: 'Nome do Responsável', value: 'nomeResponsavel', required: true },
               { text: 'Contato do Responsável', value: 'contatoResponsavel' },
-              { text: 'Endereço', value: 'enderecoGeradoPeloCep' },
+              { text: 'Endereço', value: 'enderecoGeradoPeloCep', required: true },
               { text: 'Bairro', value: 'enderecoBairro' },
-              { text: 'Cidade', value: 'enderecoGeradoCidade' },
+              { text: 'Cidade', value: 'enderecoGeradoCidade', required: true },
               { text: 'UF', value: 'enderecoGeradoUf' },
-              { text: 'Telefone', value: 'telefone' }
+              { text: 'Telefone', value: 'telefone', mask: '(##) #####-####' }
             ],
             onSelectRow: async (item) => {
               await this.buildClientePessoaCustomInput(item.id,
@@ -355,6 +386,47 @@ export default {
           text: labelInput,
           value: key,
           entity: 'clienteOuFornecedor',
+          where: {
+            id
+          },
+          headers: this.customInputs[customInputName].header.headers,
+          preSave: (itemAdicionado) => {
+            itemAdicionado.id = id
+          },
+          onSelectRow: async (item) => {
+            getItemData(item)
+          },
+          onSave: async (item) => {
+            getItemData(item)
+          }
+        }
+      }
+    },
+    buildSolicitanteCustomInput (id, key = 'idSolicitante', labelInput = 'Nome do Solicitante', dynamicAttribute = 'solicitante', customInputName = 'solicitanteProps') {
+      const getItemData = async (item) => {
+        this.form[key] = item.id
+        const data = (await this.find({
+          updateState: false,
+          entity: 'solicitante',
+          params: {
+            where: {
+              id: item.id
+            }
+          }
+        }))[0]
+        if (data) {
+          this.dynamicValues = {
+            ...this.dynamicValues,
+            [dynamicAttribute]: data
+          }
+        }
+      }
+      this.customInputs[customInputName] = {
+        header: {
+          type: 'grid-select-item-crud',
+          text: labelInput,
+          value: key,
+          entity: 'solicitante',
           where: {
             id
           },

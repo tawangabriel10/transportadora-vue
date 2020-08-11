@@ -26,101 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: true,
         defaultValue: sequelize.fn('now')
       },
-      idConsignatario: {
-        field: 'id_consignatario',
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
-      nomeConsignatarioResponsavel: {
-        field: 'nome_consignatario_responsavel',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      idRedespacho: {
-        field: 'id_redespacho',
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
-      nomeRedespachoResponsavel: {
-        field: 'nome_redespacho_responsavel',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      idFrete: {
-        field: 'id_frete',
-        type: DataTypes.INTEGER,
-        allowNull: true
-      },
-      dataChegada: {
-        field: 'data_chegada',
-        type: DataTypes.DATEONLY,
-        get () {
-          const value = this.getDataValue('dataChegada')
-          return value ? moment(value, 'YYYY-MM-DD').format('DD/MM/YYYY') : null
-        },
-        set (value) {
-          if (value) {
-            value = moment(value, 'DD/MM/YYYY').format('YYYY-MM-DD')
-            this.setDataValue('dataChegada', value)
-          }
-        },
-        allowNull: true
-      },
-      horaChegada: {
-        field: 'hora_chegada',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      formaPagamento: {
-        field: 'forma_pagamento',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      respPagamento: {
-        field: 'resposta_pagamento',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      numeroReferencia: {
-        field: 'numero_referencia',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      valorReferencia: {
-        field: 'valor_referencia',
-        type: DataTypes.DOUBLE,
-        allowNull: true
-      },
-      conhecimento: {
-        field: 'conhecimento',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      notaFiscal: {
-        field: 'nota_fiscal',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      finalidadeTransporte: {
-        field: 'finalidade_transporte',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      material: {
-        field: 'material',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      numeroRisco: {
-        field: 'numero_risco',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
-      numeroONU: {
-        field: 'numero_onu',
-        type: DataTypes.STRING,
-        allowNull: true
-      },
       seguradora: {
         field: 'seguradora',
         type: DataTypes.STRING,
@@ -184,24 +89,7 @@ module.exports = (sequelize, DataTypes) => {
     DadosOpcionaisModel.appDefinitions = {
         autoCrud: true,
         associations: {
-            consignatario: {
-                from: 'id_consignatario',
-                to: 'ClienteOuFornecedor',
-                toColumn: 'id',
-                type: ASSOCIATION_TYPE.MANY_TO_ONE
-            },
-            redespacho: {
-                from: 'id_redespacho',
-                to: 'ClienteOuFornecedor',
-                toColumn: 'id',
-                type: ASSOCIATION_TYPE.MANY_TO_ONE
-            },
-            frete: {
-                from: 'id_frete',
-                to: 'Frete',
-                toColumn: 'id',
-                type: ASSOCIATION_TYPE.MANY_TO_ONE
-            }
+
         }
     }
     

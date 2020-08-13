@@ -323,7 +323,7 @@ export default {
 
     parseRules (rules, field) {
       let parsedRules = []
-      if (rules && rules.length) {
+      if (rules && rules.length > 0) {
         rules.forEach(rule => {
           if (this.$utils.formRules[rule]) {
             parsedRules.push(this.$utils.formRules[rule](field))

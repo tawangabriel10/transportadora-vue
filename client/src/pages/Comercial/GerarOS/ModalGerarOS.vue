@@ -16,7 +16,9 @@
             <v-tab class="disabledTab" href="#tab-ocorrencias">4. Ocorrências</v-tab>
 
             <v-tab-item value="tab-ordem-de-coleta">
-              <ordem-de-coleta :form="form.ordemDeColeta"></ordem-de-coleta>
+              <v-form ref="formOrdemDeColeta" v-model="form.ordemDeColeta.valid">
+                <ordem-de-coleta :form="form.ordemDeColeta"></ordem-de-coleta>
+              </v-form>
             </v-tab-item>
 
             <v-tab-item value="tab-mercadorias">
@@ -24,7 +26,9 @@
             </v-tab-item>
 
             <v-tab-item value="tab-dados-opcionais">
-              <dados-opcionais :form="form.dadosOpcionais"></dados-opcionais>
+              <v-form ref="formDadosOpcionais" v-model="form.dadosOpcionais.valid">
+                <dados-opcionais :form="form.dadosOpcionais"></dados-opcionais>
+              </v-form>
             </v-tab-item>
 
             <v-tab-item value="tab-ocorrencias">
@@ -35,7 +39,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn @click="showDialog = false">Cancelar</v-btn>
-        <v-btn
+          <v-btn
             color="blue"
             :disabled="currentTab === 'tab-ocorrencias'"
             @click="onShowOcorrencias"
@@ -115,8 +119,9 @@ export default {
   methods: {
     ...mapActions("Crud", ["find", "updateRow", "insertRow"]),
     onVoltarDados() {
+      console.log("FORM: ", this.form);
       if (this.currentTab === TAB_OCORRENCIAS) {
-        this.currentTab = TAB_ORDEM_DE_COLETA
+        this.currentTab = TAB_ORDEM_DE_COLETA;
       } else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
         this.currentTab = TAB_MERCADORIAS;
       } else if (this.currentTab === TAB_MERCADORIAS) {
@@ -124,16 +129,24 @@ export default {
       }
     },
     onAvancarDados() {
+      console.log("FORM: ", this.form);
+      console.log("$REF: ", this.$refs.formOrdemDeColeta);
       if (this.currentTab === TAB_ORDEM_DE_COLETA) {
+        if (!this.$refs.formOrdemDeColeta.validate()) {
+          return;
+        }
         this.currentTab = TAB_MERCADORIAS;
       } else if (this.currentTab === TAB_MERCADORIAS) {
+        if (!this.form.mercadorias.length === 0) {
+          return;
+        }
         this.currentTab = TAB_DADOS_OPCIONAIS;
       } /* else if (this.currentTab === TAB_DADOS_OPCIONAIS) {
                 this.currentTab = TAB_OCORRENCIAS
             }*/
     },
     onShowOcorrencias() {
-        this.currentTab = TAB_OCORRENCIAS;
+      this.currentTab = TAB_OCORRENCIAS;
     },
     async getCurrentOs(id) {
       this.currentOs =
@@ -161,12 +174,15 @@ export default {
       };
     },
     async salvar() {
+      if (!this.$refs.formDadosOpcionais.validate()) {
+        return;
+      }
       let entity = {
         ...this.form.ordemDeColeta,
         mercadorias: this.form.mercadorias,
-        dadosOpcionais: this.form.dadosOpcionais
+        dadosOpcionais: this.form.dadosOpcionais,
       };
-      console.log('ENTITY', entity)
+      console.log("ENTITY", entity);
       if (this.id) {
         await this.updateRow({
           updateState: false,
@@ -181,7 +197,7 @@ export default {
           entity: "ordemServico",
           values: entity,
         });
-      //  await this.$router.push({ path: `/comercial/ordem-de-servicos` });
+        //  await this.$router.push({ path: `/comercial/ordem-de-servicos` });
         this.showDialog = false;
         this.getCurrentOs(os.id);
       }

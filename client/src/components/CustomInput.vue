@@ -5,12 +5,13 @@
                     v-model="customValue"
                     v-bind="header.options || {}"
                     :dense="dense"
+                    :rules="parseRules(header.rules, header.text)"
                     :label="header.text"
                     @change="change()"
       ></v-text-field>
       <v-textarea
         v-else-if="header.type === 'textarea'"
-        :rules="rules"
+        :rules="parseRules(header.rules, header.text)"
         v-model="editedItem[header.value]"
         :dense="dense"
         :label="header.text"
@@ -20,18 +21,18 @@
       <div v-else-if="header.type === 'radio'">
         <label class="radio-label">{{ header.text }}</label>
         <v-radio-group v-bind="header.options || {}" v-model="editedItem[header.value]"
-                       :mandatory="header.rules && header.rules.includes('required')" :rules="rules" row
+                       :mandatory="header.rules && header.rules.includes('required')" :rules="parseRules(header.rules, header.text)" row
                        @change="change()">
           <v-radio :key="item.id" v-for="item in header.items" :label="item.nome || item"
                    :value="item.id || item"></v-radio>
         </v-radio-group>
       </div>
       <v-checkbox v-else-if="header.type === 'checkbox'" v-bind="header.options || {}" :label="header.text"
-                  v-model="editedItem[header.value]" :rules="rules" @change="change()"></v-checkbox>
+                  v-model="editedItem[header.value]" :rules="parseRules(header.rules, header.text)" @change="change()"></v-checkbox>
       <v-currency-field v-else-if="header.type === 'currency'"
                         v-model="editedItem[header.value]"
                         :label="header.text"
-                        :rules="rules"
+                        :rules="parseRules(header.rules, header.text)"
                         :dense="dense"
                         v-bind="header.options || {}"
       ></v-currency-field>
@@ -54,7 +55,7 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            :rules="rules"
+            :rules="parseRules(header.rules, header.text)"
             v-mask="header.mask ? header.mask : noMask"
             v-model="editedItem[header.value]"
             :dense="dense"
@@ -71,6 +72,7 @@
         <v-date-picker v-if="header.type === 'date'"
                        v-model="customValue"
                        no-title
+                       :rules="parseRules(header.rules, header.text)"
                        @input="parseDate"
                        v-bind="header.pickerOptions || {}"
         ></v-date-picker>
@@ -201,6 +203,17 @@ export default {
     },
     change () {
       this.$emit('change', this.editedItem[this.header.value])
+    },
+    parseRules (rules, field) {
+      let parsedRules = []
+      if (rules && rules.length) {
+        rules.forEach(rule => {
+          if (this.$utils.formRules[rule]) {
+            parsedRules.push(this.$utils.formRules[rule](field))
+          }
+        })
+      }
+      return parsedRules
     }
   }
 }

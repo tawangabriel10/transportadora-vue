@@ -3,6 +3,7 @@
     <v-col>
       <v-card flat tile>
         <v-card-text>
+          <v-form v-model="formMercadoria.valid">
           <v-col>
             <h3>Dados da Mercadoria</h3>
             <v-row>
@@ -71,6 +72,7 @@
               </v-col>
             </v-row>
           </v-col>
+          </v-form>
         </v-card-text>
 
         <v-card-actions>
@@ -153,6 +155,9 @@ export default {
   },
   methods: {
     onSave() {
+      if (!this.formMercadoria.valid) {
+        return;
+      }
       this.form.push({
         ...this.formMercadoria,
       });

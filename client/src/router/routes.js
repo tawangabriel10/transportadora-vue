@@ -1,6 +1,6 @@
 import Home from '@/pages/Home'
-import Usuarios from '@/pages/Administracao/Usuarios/List'
-import Configuracoes from '@/pages/Administracao/Configuracoes/Configuracoes'
+import Usuarios from '@/pages/Administrativo/Usuarios/List'
+import Configuracoes from '@/pages/Administrativo/Configuracoes/Configuracoes'
 import OrdemDeServico from '@/pages/Comercial/OrdemDeServico'
 import ManterOrdemDeServico from '@/pages/Comercial/ManterOrdemDeServico'
 import MapaDeViagem from '@/pages/Logistica/MapaDeViagem/MapaDeViagem'
@@ -8,6 +8,8 @@ import AcertoDeViagem from '@/pages/Logistica/AcertoDeViagem/AcertoDeViagem'
 import CadastroDeClientes from '@/pages/Comercial/CadastroDeClientes/CadastroDeClientes'
 import CadastroDeFornecedor from '@/pages/Comercial/CadastroDeFornecedor/CadastroDeFornecedor'
 import GerarFatura from '@/pages/Financeiro/GerarFatura/GerarFatura'
+import RecursosHumanos from '@/pages/RecursosHumanos/RecursosHumanos'
+import AnaliseIndicadores from '@/pages/AnaliseIndicadores/AnaliseIndicadores'
 
 const routes = [
   {
@@ -16,41 +18,10 @@ const routes = [
     component: Home,
     meta: {
       title: 'Home',
+      icon: 'mdi mdi-home',
       active: true,
       hideFromMenu: true
     }
-  },
-  {
-    path: '/administracao',
-    name: 'administracao',
-    component: Home,
-    redirect: '/administracao/usuarios',
-    meta: {
-      icon: 'mdi mdi-clipboard-alert',
-      parent: true,
-      title: 'Sistema',
-      userPerfil: ['ADM']
-    },
-    children: [
-      {
-        path: '/administracao/usuarios',
-        component: Usuarios,
-        meta: {
-          icon: 'mdi mdi-account-switch',
-          title: 'Usuários',
-          userPerfil: ['ADM']
-        }
-      },
-      {
-        path: '/administracao/configuracoes',
-        component: Configuracoes,
-        meta: {
-          icon: 'mdi mdi-settings',
-          title: 'Configurações do Sistema',
-          userPerfil: ['ADM']
-        }
-      }
-    ]
   },
   {
     path: '/comercial',
@@ -107,29 +78,6 @@ const routes = [
     ]
   },
   {
-    path: '/financeiro',
-    name: 'financeiro',
-    component: Home,
-    redirect: '/financeiro/gerar-fatura',
-    meta: {
-      icon: 'mdi mdi-cash-multiple',
-      parent: true,
-      title: 'Financeiro',
-      userPerfil: ['ADM']
-    },
-    children: [
-      {
-        path: '/financeiro/gerar-fatura',
-        component: GerarFatura,
-        meta: {
-          icon: 'mdi mdi-cash-usd',
-          title: 'Gerar Fatura Final',
-          userPerfil: ['ADM']
-        }
-      }
-    ]
-  },
-  {
     path: '/logistica',
     name: 'logistica',
     component: Home,
@@ -156,6 +104,107 @@ const routes = [
         meta: {
           icon: 'mdi mdi-wallet-travel',
           title: 'Acerto de Viagem',
+          userPerfil: ['ADM']
+        }
+      }
+    ]
+  },
+  {
+    path: '/financeiro',
+    name: 'financeiro',
+    component: Home,
+    redirect: '/financeiro/gerar-fatura',
+    meta: {
+      icon: 'mdi mdi-cash-multiple',
+      parent: true,
+      title: 'Financeiro',
+      userPerfil: ['ADM']
+    },
+    children: [
+      {
+        path: '/financeiro/gerar-fatura',
+        component: GerarFatura,
+        meta: {
+          icon: 'mdi mdi-cash-usd',
+          title: 'Gerar Fatura Final',
+          userPerfil: ['ADM']
+        }
+      }
+    ]
+  },
+  {
+    path: '/recursos-humanos',
+    name: 'Recursos Humanos',
+    component: Home,
+    redirect: '/recursos-humanos',
+    meta: {
+      icon: 'mdi mdi-calendar-account',
+      parent: false,
+      title: 'Recursos Humanos',
+      userPerfil: ['ADM']
+    },
+    children: [
+      {
+        path: '/recursos-humanos',
+        component: RecursosHumanos,
+        meta: {
+          icon: 'mdi mdi-calendar-account-outline',
+          title: 'Recursos Humanos',
+          userPerfil: ['ADM']
+        }
+      }
+    ]
+  },
+  {
+    path: '/administrativo',
+    name: 'administrativo',
+    component: Home,
+    redirect: '/administrativo/usuarios',
+    meta: {
+      icon: 'mdi mdi-file-document-edit-outline',
+      parent: true,
+      title: 'Administrativo',
+      userPerfil: ['ADM']
+    },
+    children: [
+      {
+        path: '/administrativo/usuarios',
+        component: Usuarios,
+        meta: {
+          icon: 'mdi mdi-account-switch',
+          title: 'Usuários',
+          userPerfil: ['ADM']
+        }
+      },
+      {
+        path: '/administrativo/configuracoes',
+        component: Configuracoes,
+        meta: {
+          icon: 'mdi mdi-settings',
+          title: 'Configurações do Sistema',
+          userPerfil: ['ADM']
+        }
+      }
+    ]
+  },
+  {
+    path: '/analise-indicadores',
+    name: 'Análise Indicadores',
+    component: Home,
+    redirect: '/analise-indicadores',
+    meta: {
+      icon: 'mdi mdi-trending-up',
+      parent: true,
+      title: 'Análise Indicadores',
+      userPerfil: ['ADM']
+    },
+    children: [
+      {
+        path: '/analise-indicadores',
+        component: AnaliseIndicadores,
+        meta: {
+          icon: 'mdi mdi-trending-up',
+          title: 'Análise Indicadores',
           userPerfil: ['ADM']
         }
       }

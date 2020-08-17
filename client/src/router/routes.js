@@ -1,14 +1,21 @@
 import Home from '@/pages/Home'
-import Usuarios from '@/pages/Administrativo/Usuarios/List'
-import Configuracoes from '@/pages/Administrativo/Configuracoes/Configuracoes'
-import OrdemDeServico from '@/pages/Comercial/OrdemDeServico'
-import ManterOrdemDeServico from '@/pages/Comercial/ManterOrdemDeServico'
+
+import OrdemDeServico from '@/pages/Comercial/GerarOS/OrdemDeServico'
+import CadastroDeFornecedor from '@/pages/Comercial/CadastroDeFornecedor/CadastroDeFornecedor'
+import CadastroDeClientes from '@/pages/Comercial/CadastroDeClientes/CadastroDeClientes'
+import ManterOrdemDeServico from '@/pages/Comercial/GerarOS/ManterOrdemDeServico'
+import PesquisarProposta from '@/pages/Comercial/Proposta/PesquisarProposta'
+
 import MapaDeViagem from '@/pages/Logistica/MapaDeViagem/MapaDeViagem'
 import AcertoDeViagem from '@/pages/Logistica/AcertoDeViagem/AcertoDeViagem'
-import CadastroDeClientes from '@/pages/Comercial/CadastroDeClientes/CadastroDeClientes'
-import CadastroDeFornecedor from '@/pages/Comercial/CadastroDeFornecedor/CadastroDeFornecedor'
+
 import GerarFatura from '@/pages/Financeiro/GerarFatura/GerarFatura'
+
+import Configuracoes from '@/pages/Administrativo/Configuracoes/Configuracoes'
+import Usuarios from '@/pages/Administrativo/Usuarios/List'
+
 import RecursosHumanos from '@/pages/RecursosHumanos/RecursosHumanos'
+
 import AnaliseIndicadores from '@/pages/AnaliseIndicadores/AnaliseIndicadores'
 
 const routes = [
@@ -27,7 +34,7 @@ const routes = [
     path: '/comercial',
     name: 'comercial',
     component: Home,
-    redirect: '/comercial/ordem-de-servicos',
+    redirect: '/comercial/proposta',
     meta: {
       icon: 'mdi mdi-shopping',
       parent: true,
@@ -35,6 +42,15 @@ const routes = [
       userPerfil: ['ADM']
     },
     children: [
+      {
+        path: '/comercial/proposta',
+        component: PesquisarProposta,
+        meta: {
+          icon: 'mdi mdi-arrow-right-bold-circle',
+          title: 'Pesquisar Proposta',
+          userPerfil: ['ADM']
+        }
+      },
       {
         path: '/comercial/ordem-de-servicos',
         component: OrdemDeServico,

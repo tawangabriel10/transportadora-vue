@@ -106,7 +106,7 @@ export default {
         ordemDeColeta: {},
         mercadorias: [],
         dadosOpcionais: {},
-        ocorrencias: {},
+        ocorrencias: [],
       },
       currentTab: TAB_ORDEM_DE_COLETA,
     };

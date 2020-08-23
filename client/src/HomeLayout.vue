@@ -155,14 +155,14 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Login', ['logoutAction']),
+    ...mapActions('Empresas', ['find', 'setCurrentEmpresa']),
     onLogoutBtnClick () {
       this.logoutAction()
         .then(() => {
           this.$router.push('/')
         })
-    },
-    ...mapActions('Login', ['logoutAction']),
-    ...mapActions('Crud', ['find', 'setCurrentEmpresa'])
+    }
   },
   computed: {
     ...mapGetters('Login', { userData: 'userData' }),

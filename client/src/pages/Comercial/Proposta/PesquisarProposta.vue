@@ -27,17 +27,14 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'ID', value: 'id', options: { disabled: true }, hideOnAdd: false },
-        { text: 'Nº Ordem de Serviço', value: 'numOrdemServico', type: 'text' },
-        { text: 'Data da Emissão', value: 'dataEmissao', type: 'date' },
-        { text: 'Data Coleta', value: 'dataColeta', type: 'date' },
-        { text: 'Status', value: 'status', type: 'text' },
-        { text: 'Local Coleta', value: 'localColeta', type: 'text' },
-        { text: 'Local Entrega', value: 'localEntrega', type: 'text' },
-        { text: 'Nome Solicitante', value: 'nomeSolicitante', type: 'text' },
-        { text: 'Nome Rementente', type: 'text', value: 'nomeRemetenteContatoResponsavel', hide: true },
-        { text: 'Nome Destinatario', type: 'text', value: 'nomeRemetenteContatoResponsavel', hide: true  },
-        { text: 'Remetente', value: 'idRemetente', lookup: 'clienteOuFornecedor', hide: true },
+        { text: 'Número da Proposta', value: 'numProposta', type: 'number' },
+        { text: 'Situação', value: 'situacao', type: 'text' },
+        { text: 'Data da Proposta', value: 'validade', type: 'date' },
+        { text: 'Cliente', value: 'idCliente', type: 'text'  },
+        { text: 'Serviço / Orgão', type: 'text', value: 'idClienteCalculo' },
+        { text: 'Origem', value: 'origem', type: 'text' },
+        { text: 'Destino', value: 'destino', type: 'text' },
+        { text: 'Valor da Proposta', value: 'valorSeguro', type: 'currency'  },
         { text: 'Ações', value: 'action', sortable: true },
       ],
       showDialog: false

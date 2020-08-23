@@ -4,9 +4,10 @@ import config from '@/config'
 const empresasUrl = config.baseUrl + '/empresas'
 
 export default {
-    async setCurrentEmpresa ({ commit }, idEmpresa) {
+      async setCurrentEmpresa ({ commit }, idEmpresa) {
         const { data: currentEmpresa } = await http.get(`${empresasUrl}/${idEmpresa}`)
         commit('setCurrentEmpresa', currentEmpresa)
+        localStorage.setItem('currentEmpresa', JSON.stringify(currentEmpresa))
       },
       async find ({ commit, state }, { params = {}, updateState = true } = {}) {
         commit('set_loading', true)

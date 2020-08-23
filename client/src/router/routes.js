@@ -46,7 +46,7 @@ const routes = [
         path: '/comercial/proposta',
         component: PesquisarProposta,
         meta: {
-          icon: 'mdi mdi-arrow-right-bold-circle',
+          icon: 'mdi mdi-clipboard-text',
           title: 'Pesquisar Proposta',
           userPerfil: ['ADM']
         }

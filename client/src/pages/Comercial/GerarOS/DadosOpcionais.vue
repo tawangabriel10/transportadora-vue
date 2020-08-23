@@ -66,18 +66,20 @@
         <v-col>
           <h3>Seguro</h3>
           <v-row>
-            <v-col>
-              <custom-input
-                :header="{ type: 'text', text: 'Seguradora', value: 'seguradora' }"
-                :edited-item="form"
-              />
-            </v-col>
-            <v-col>
-              <custom-input
-                :header="{ type: 'text', text: 'Nº Apólice', value: 'numeroApolice' }"
-                :edited-item="form"
-              />
-            </v-col>
+              <v-col>
+                <v-text-field
+                  disabled
+                  label="Seguradora"
+                  :value="currentEmpresa && currentEmpresa.seguradora"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  disabled
+                  label="Nº Apólice"
+                  :value="currentEmpresa && currentEmpresa.numeroApolice"
+                />
+              </v-col>
           </v-row>
         </v-col>
       </v-row>
@@ -90,6 +92,7 @@
 <script>
 import { mapActions } from "vuex";
 import CustomInput from "@/components/CustomInput";
+import empresasStore from '@/store/empresas'
 
 export default {
   components: { CustomInput },
@@ -101,6 +104,7 @@ export default {
   },
   data() {
     return {
+      currentEmpresa: empresasStore.getters.currentEmpresa,
       dynamicValues: {
         consignatario: {},
         redespacho: {},

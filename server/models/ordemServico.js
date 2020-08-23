@@ -198,6 +198,12 @@ module.exports = (sequelize, DataTypes) => {
         to: 'Solicitante',
         toColumn: 'id',
         type: ASSOCIATION_TYPE.ONE_TO_ONE
+      },
+      ocorrencias: {
+        from: 'id',
+        to: 'Ocorrencias',
+        toColumn: 'id_ordem_servico',
+        type: ASSOCIATION_TYPE.ONE_TO_MANY
       }
     }
   }

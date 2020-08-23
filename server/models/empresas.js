@@ -34,6 +34,16 @@ module.exports = (sequelize, DataTypes) => {
       field: 'cep',
       type: DataTypes.STRING,
       allowNull: true
+    },
+    seguradora: {
+      field: 'seguradora',
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    numeroApolice: {
+      field: 'numero_apolice',
+      type: DataTypes.STRING,
+      allowNull: true
     }
   }, {
     tableName: 'tb_empresas'
